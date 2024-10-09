@@ -5,6 +5,7 @@ import java.util.List;
 
 public class User {
     private String id;
+    private String password;
     private String nome;
     private String cognome;
     private int phoneNumber;
