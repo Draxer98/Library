@@ -1,8 +1,6 @@
 package category;
 
-import category.CategoryType;
-
 public class Category {
+    private String id;
     private CategoryType type;
-    private String idShelf;
 }

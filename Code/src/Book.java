@@ -6,13 +6,12 @@ public class Book {
     private String isbn;
     private int counterCopyBook;
     private int counterSell;
-    protected String title;
-    protected List<Author> authors;
-    protected double price;
-    protected Category mainCategory;
-    protected List<Category> categoryList;
-
-
+    private String title;
+    private List<Author> authors;
+    private double price;
+    private Category mainCategory;
+    private List<Category> categoryList;
+    private List<String> isbnCopyBook;
 
     public String getIsbn() {
         return isbn;
@@ -61,5 +60,11 @@ public class Book {
     }
     public void setCategoryList(List<Category> categoryList) {
         this.categoryList = categoryList;
+    }
+    public List<String> getIsbnCopyBook() {
+        return isbnCopyBook;
+    }
+    public void setIsbnCopyBook(List<String> isbnCopyBook) {
+        this.isbnCopyBook = isbnCopyBook;
     }
 }
