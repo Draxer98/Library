@@ -18,41 +18,44 @@ class Initialize {
     }
 
     /**
-     * Carica un elenco di utenti da un file JSON specificato, popolando ogni utente
-     * con i rispettivi dati di prestiti (loans) e vendite (sells).
+     * Loads a list of users from a specified JSON file, populating each user
+     * with their respective loan (loans) and sale (sells) data.
      * <p>
-     * Il file JSON deve avere la seguente struttura:
+     * The JSON file must have the following structure:
      * <pre>
      * [
      *   {
-     *     "id": "stringa",
-     *     "password": "stringa",
-     *     "name": "stringa",
-     *     "surname": "stringa",
-     *     "phoneNumber": numero intero,
+     *     "id": "string",
+     *     "password": "string",
+     *     "name": "string",
+     *     "surname": "string",
+     *     "phoneNumber": integer,
      *     "loans": [
      *       {
-     *         "isbn": "stringa",
-     *         "loanDate": "stringa (formato: dd-MM-yyyy)",
-     *         "expirationDate": "stringa (formato: dd-MM-yyyy)"
-     *       }
+     *         "isbn": "string",
+     *         "loanDate": "string (format: dd-MM-yyyy)",
+     *         "expirationDate": "string (format: dd-MM-yyyy)"
+     *       },
+     *       ...
      *     ],
      *     "sells": [
      *       {
-     *         "isbnSoldBook": "stringa",
-     *         "idUser": "stringa",
-     *         "price": numero intero,
-     *         "sellDate": "stringa (formato: dd-MM-yyyy)"
-     *       }
+     *         "isbnSoldBook": "string",
+     *         "idUser": "string",
+     *         "price": integer,
+     *         "sellDate": "string (format: dd-MM-yyyy)"
+     *       },
+     *       ...
      *     ]
-     *   }
+     *   },
+     *   ...
      * ]
      * </pre>
      *
-     * @param path il percorso del file JSON da cui caricare i dati degli utenti.
-     *
-     * @return una lista di oggetti `User` caricati dal file JSON.
+     * @param path the path of the JSON file from which to load user data.
+     * @return a list of `User` objects loaded from the JSON file.
      */
+
     private ArrayList<User> loadUsersFromFile(String path) {
         ArrayList<User> users = new ArrayList<>();
 
