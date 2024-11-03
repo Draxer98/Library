@@ -46,7 +46,3 @@ public class Main {
         }
     }
 }
-
-/*
-* ADD login system in main ; ADD login method in LoginManager ; MODIFY the loadUserFromFile in Initialize ; ADD constructor and getters and setters in Loan
-* */
