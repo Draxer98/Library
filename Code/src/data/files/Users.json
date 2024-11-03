@@ -1,5 +1,57 @@
 [
   {
-    "id": "U000001"
+    "id": "TID123",
+    "password": "TPW123",
+    "name": "John",
+    "surname": "Doe",
+    "phoneNumber": 1234567890,
+    "loans": [
+      {
+        "isbn": "978-3-16-148410-0",
+        "loanDate": "01-01-2023",
+        "expirationDate": "01-02-2023"
+      },
+      {
+        "isbn": "978-1-23-456789-7",
+        "loanDate": "15-02-2023",
+        "expirationDate": "15-03-2023"
+      }
+    ],
+    "sells": [
+      {
+        "isbnSoldBook": "978-0-12-345678-9",
+        "idUser": "TID123",
+        "price": 25,
+        "sellDate": "10-03-2023"
+      },
+      {
+        "isbnSoldBook": "978-9-87-654321-0",
+        "idUser": "TID123",
+        "price": 30,
+        "sellDate": "20-03-2023"
+      }
+    ]
+  },
+  {
+    "id": "TID456",
+    "password": "TPW456",
+    "name": "Jane",
+    "surname": "Smith",
+    "phoneNumber": 9876543210,
+    "loans": [
+      {
+        "isbn": "978-1-84-749615-8",
+        "loanDate": "05-01-2023",
+        "expirationDate": "05-02-2023"
+      }
+    ],
+    "sells": [
+      {
+        "isbnSoldBook": "978-1-92-837465-2",
+        "idUser": "TID456",
+        "price": 45,
+        "sellDate": "25-03-2023"
+      }
+    ]
   }
 ]

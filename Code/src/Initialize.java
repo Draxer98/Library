@@ -58,8 +58,13 @@ class Initialize {
 
     private ArrayList<User> loadUsersFromFile(String path) {
         ArrayList<User> users = new ArrayList<>();
+        JSONArray jsonArray;
 
-        JSONArray jsonArray = JsonReader.readArray(path);
+        try {
+            jsonArray = JsonReader.readArray(path);
+        } catch (Exception e) {
+            return null;
+        }
 
         // Cycle through the json array of jsonObjects
         for (Object obj : jsonArray) {
@@ -89,7 +94,7 @@ class Initialize {
                 sells.add(new Sell(
                         (String) jsonSell.get("isbnSoldBook"),
                         (String) jsonSell.get("idUser"),
-                        (int) jsonSell.get("price"),
+                        ((Number) jsonSell.get("price")).doubleValue(),
                         LocalDate.parse((String) jsonSell.get("sellDate"), DateTimeFormatter.ofPattern("dd-MM-yyyy"))
                 ));
             }
@@ -97,7 +102,7 @@ class Initialize {
             users.add(new User(
                     (String) jsonUser.get("id"), (String) jsonUser.get("password"),
                     (String) jsonUser.get("name"), (String) jsonUser.get("surname"),
-                    (int) jsonUser.get("phoneNumber"),
+                    ((Number) jsonUser.get("phoneNumber")).intValue(),
                     loans, sells
             ));
         }
