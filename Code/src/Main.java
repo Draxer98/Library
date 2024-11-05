@@ -15,9 +15,36 @@ public class Main {
                 "Esci"
         };
 
+        String[] mainMenu = {
+                "LIBRERIA",
+                "Comprare un libro",
+                "Prendere in prestito un libro",
+                "Visualizza prestiti correnti",
+                "Visualizza storico prestiti",
+                "Visualizza storico vendite",
+                "Estendere la data di consegna di un libro",
+                "Info account",
+                "Esci",
+        };
+
+        String[] sellBookMenu = {
+                "COMPRA UN LIBRO",
+                "Inseisci le informazioni del libro da comprare",
+                "Visualizzare libri disponibili",
+                "Esci",
+        };
+
+        String[] loanBookMenu = {
+                "PRENDI IN PRESTITO UN LIBRO",
+                "Inserire informazioni del libro da prendere in prestito",
+                "Visualizzare libri disponibili",
+                "Esci",
+        };
+
         boolean exit = true;
         String loginId, loginPassword;
 
+        /* LOGIN PROCESS */
         while (exit) {
             switch (Util.menu(loginMenu, scanner)) {
                 case 1: {
@@ -42,6 +69,15 @@ public class Main {
                     exit = false;
                     break;
                 }
+            }
+        }
+        /* END LOGIN PROCESS */
+
+        exit = true;
+
+        while (exit) {
+            switch (Util.menu(mainMenu, scanner)) {
+
             }
         }
     }
