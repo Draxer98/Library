@@ -10,11 +10,37 @@ import java.util.ArrayList;
 
 class Initialize {
     private ArrayList<User> users;
+    private ArrayList<Admin> admins;
     private LoginManager loginManager;
 
-    public Initialize(String path) {
+    public Initialize(String userPath, String adminPath) {
         users = new ArrayList<>();
-        users = loadUsersFromFile(path);
+        users = loadUsersFromFile(userPath);
+        admins = new ArrayList<>();
+        admins = loadAdminsFromFile(adminPath);
+    }
+
+    private ArrayList<Admin> loadAdminsFromFile(String path) {
+        ArrayList<Admin> admins = new ArrayList<>();
+        JSONArray jsonArray;
+
+        try {
+            jsonArray = JsonReader.readArray(path);
+        } catch (Exception e) {
+            return null;
+        }
+
+        // Cycle through the json array of jsonObjects
+        for (Object obj : jsonArray) {
+            JSONObject jsonAdmin = (JSONObject) obj;
+
+            // Create new Admin with the correct data
+            admins.add(new Admin(
+                    (String) jsonAdmin.get("id"), (String) jsonAdmin.get("password")
+            ));
+        }
+
+        return admins;
     }
 
     /**
@@ -55,7 +81,6 @@ class Initialize {
      * @param path the path of the JSON file from which to load user data.
      * @return a list of `User` objects loaded from the JSON file.
      */
-
     private ArrayList<User> loadUsersFromFile(String path) {
         ArrayList<User> users = new ArrayList<>();
         JSONArray jsonArray;
