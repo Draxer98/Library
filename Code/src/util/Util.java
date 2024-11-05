@@ -23,7 +23,7 @@ public class Util {
         }
     }
 
-    public static int menu(String options[]) {// parametri formali
+    public static int menu(String[] options, Scanner scanner) {
         int scelta;
 
         do {
@@ -33,8 +33,6 @@ public class Util {
             }
             System.out.println();
 
-            scanner.next();
-            scanner.nextLine();
             System.out.println(options[0]);
 
             for (int i = 0; i < options.length; i++) {
@@ -46,8 +44,8 @@ public class Util {
             for (int i = 1; i < options.length; i++) {
                 System.out.println("[" + i + "]" + " " + options[i]);
             }
-            scelta = (Integer.parseInt(scanner.next()));
 
+            scelta = (Integer.parseInt(scanner.nextLine()));
 
             if ((scelta < 1) || (scelta > options.length - 1)) {
                 System.out.println("Opzione Sbagliata");

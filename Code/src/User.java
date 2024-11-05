@@ -9,11 +9,11 @@ public class User {
     private String password;
     private String name;
     private String surname;
-    private int phoneNumber;
+    private long phoneNumber;
     private ArrayList<Loan> loans;
     private ArrayList<Sell> sells;
 
-    public User(String id, String password, String name, String surname, int phoneNumber, ArrayList<Loan> loans, ArrayList<Sell> sells) {
+    public User(String id, String password, String name, String surname, long phoneNumber, ArrayList<Loan> loans, ArrayList<Sell> sells) {
          this.id = id;
          this.password = password;
          this.name = name;
@@ -70,11 +70,11 @@ public class User {
         this.surname = surname;
     }
 
-    public int getPhoneNumber() {
+    public long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
