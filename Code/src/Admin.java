@@ -1,4 +1,7 @@
-package PACKAGE_NAME;
+public class Admin extends LibraryMember {
 
-public class Admin {
+    public Admin(String id, String password) {
+        this.id = id;
+        this.password = password;
+    }
 }

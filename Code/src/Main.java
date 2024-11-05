@@ -6,8 +6,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        Initialize initialize = new Initialize("src/data/files/Users.json");
-        LoginManager loginManager = new LoginManager(initialize.getUsers());
+        Initialize initialize = new Initialize("src/data/files/Users.json", "");
+        LoginManager loginManager = new LoginManager(initialize.getUsers(), initialize.getAdmins());
 
         String[] loginMenu = {
                 "BENVENUTO",
@@ -15,7 +15,7 @@ public class Main {
                 "Esci"
         };
 
-        String[] mainMenu = {
+        String[] userMainMenu = {
                 "LIBRERIA",
                 "Comprare un libro",
                 "Prendere in prestito un libro",
@@ -27,7 +27,7 @@ public class Main {
                 "Esci",
         };
 
-        String[] sellBookMenu = {
+        String[] buyBookMenu = {
                 "COMPRA UN LIBRO",
                 "Inseisci le informazioni del libro da comprare",
                 "Visualizzare libri disponibili",
@@ -75,10 +75,43 @@ public class Main {
 
         exit = true;
 
-        while (exit) {
-            switch (Util.menu(mainMenu, scanner)) {
 
+        if (loginManager.getLoggedInUser() instanceof User) {
+            while (exit) {
+                switch (Util.menu(userMainMenu, scanner)) {
+                    /* Comprare un libro */
+                    case 1: {
+
+                        break;
+                    }
+                    case 2: {
+
+                        break;
+                    }
+                    case 3: {
+
+                        break;
+                    }
+                    case 4: {
+
+                        break;
+                    }
+                    case 5: {
+
+                        break;
+                    }
+                    case 6: {
+
+                        break;
+                    }
+                    case 7: {
+
+                        break;
+                    }
+                }
             }
+        } else {
+            /* ADMIN STUFF */
         }
     }
 }
