@@ -138,4 +138,8 @@ class Initialize {
     public ArrayList<User> getUsers() {
         return users;
     }
+
+    public ArrayList<Admin> getAdmins() {
+        return admins;
+    }
 }
