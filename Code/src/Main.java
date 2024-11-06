@@ -6,8 +6,14 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        Initialize initialize = new Initialize("src/data/files/Users.json", "");
+        Initialize initialize = new Initialize(
+                "src/data/files/Users.json",
+                "src/data/files/Admin.json",
+                "src/data/files/BooksForLoan.json",
+                "src/data/files/BooksForSell.json"
+        );
         LoginManager loginManager = new LoginManager(initialize.getUsers(), initialize.getAdmins());
+        Library library = new Library(initialize.getBookForLoan(), initialize.getBookForSell());
 
         String[] loginMenu = {
                 "BENVENUTO",
@@ -82,6 +88,12 @@ public class Main {
                     /* Comprare un libro */
                     case 1: {
 
+                        // print all the list of books
+
+                        // Ask the user to insert the isbn of one book
+
+
+
                         break;
                     }
                     case 2: {
@@ -107,6 +119,9 @@ public class Main {
                     case 7: {
 
                         break;
+                    }
+                    default: {
+                        exit = false;
                     }
                 }
             }

@@ -1,0 +1,40 @@
+[
+  {
+    "isbn": "1234567890",
+    "title": "Example Book One",
+    "authors": [
+      {
+        "name": "John",
+        "surname": "Doe"
+      },
+      {
+        "name": "Jane",
+        "surname": "Smith"
+      }
+    ],
+    "price": 24.99,
+    "category": {
+      "name": "Science Fiction",
+      "description": "Books about futuristic concepts and science"
+    },
+    "isbnCopyBook": ["1234567890", "1234567890", "1234567890"],
+    "isAvailable": true
+  },
+  {
+    "isbn": "0987654321",
+    "title": "Example Book Two",
+    "authors": [
+      {
+        "name": "Alice",
+        "surname": "Johnson"
+      }
+    ],
+    "price": 19.99,
+    "category": {
+      "name": "Fantasy",
+      "description": "Books with magical and supernatural elements"
+    },
+    "isbnCopyBook": ["0987654321", "0987654321"],
+    "isAvailable": false
+  }
+]
