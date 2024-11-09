@@ -1,3 +1,5 @@
+package books;
+
 import java.util.ArrayList;
 
 public class Author {
@@ -36,5 +38,13 @@ public class Author {
 
     public void setBooks(ArrayList<Book> books) {
         this.books = books;
+    }
+
+    @Override
+    public String toString() {
+        return "Autore {" +
+                "nome ='" + name + "'" +
+                ", cognome ='" + surname + "'" +
+                '}';
     }
 }

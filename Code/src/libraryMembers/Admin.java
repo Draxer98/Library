@@ -1,3 +1,5 @@
+package libraryMembers;
+
 public class Admin extends LibraryMember {
 
     public Admin(String id, String password) {

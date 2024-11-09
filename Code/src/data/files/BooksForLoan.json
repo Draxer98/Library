@@ -1,6 +1,6 @@
 [
   {
-    "isbn": "1234567890",
+    "isbn": "9781234567890",
     "title": "Example Book One",
     "authors": [
       {
@@ -13,15 +13,12 @@
       }
     ],
     "price": 24.99,
-    "category": {
-      "name": "Science Fiction",
-      "description": "Books about futuristic concepts and science"
-    },
-    "isbnCopyBook": ["1234567890", "1234567890", "1234567890"],
+    "category": "CAT1",
+    "isbnCopyBook": ["9781234567891", "9781234567892", "9781234567893"],
     "isAvailable": true
   },
   {
-    "isbn": "0987654321",
+    "isbn": "9780987654320",
     "title": "Example Book Two",
     "authors": [
       {
@@ -30,11 +27,8 @@
       }
     ],
     "price": 19.99,
-    "category": {
-      "name": "Fantasy",
-      "description": "Books with magical and supernatural elements"
-    },
-    "isbnCopyBook": ["0987654321", "0987654321"],
+    "category": "CAT2",
+    "isbnCopyBook": ["9780987654321", "9780987654322"],
     "isAvailable": false
   }
 ]

@@ -1,3 +1,5 @@
+package libraryMembers;
+
 import events.Loan;
 import events.Sell;
 import org.json.simple.JSONObject;
@@ -82,14 +84,14 @@ public class User extends LibraryMember {
 
     @Override
     public String toString() {
-        return "User: " +
-                "id='" + id + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", phoneNumber=" + phoneNumber +
-                ", loans=" + loans +
-                ", sells=" + sells;
+        return "Utente: " +
+                "id='" + id + "'" +
+                ", password ='" + password + "'" +
+                ", nome = '" + name + "'" +
+                ", cognome = '" + surname + "'" +
+                ", Numero di telefono = '" + phoneNumber + "'" +
+                ", Prestiti = '" + loans + "'" +
+                ", Acquisti = '" + sells + "'";
     }
 
     public JSONObject toJson() {

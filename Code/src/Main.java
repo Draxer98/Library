@@ -1,5 +1,13 @@
+import books.BookCopy;
+import events.Sell;
+import libraryMembers.User;
+import util.Initialize;
+import util.Library;
+import util.LoginManager;
 import util.Util;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -8,9 +16,8 @@ public class Main {
 
         Initialize initialize = new Initialize(
                 "src/data/files/Users.json",
-                "src/data/files/Admin.json",
-                "src/data/files/BooksForLoan.json",
-                "src/data/files/BooksForSell.json"
+                "src/data/files/users.Admin.json",
+                "src/data/files/BooksForLoan.json"
         );
         LoginManager loginManager = new LoginManager(initialize.getUsers(), initialize.getAdmins());
         Library library = new Library(initialize.getBookForLoan(), initialize.getBookForSell());
@@ -48,12 +55,14 @@ public class Main {
         };
 
         boolean exit = true;
-        String loginId, loginPassword;
+
 
         /* LOGIN PROCESS */
         while (exit) {
             switch (Util.menu(loginMenu, scanner)) {
                 case 1: {
+                    String loginId, loginPassword;
+
                     // Insert id
                     System.out.print("Inserisci il tuo id (se vuoi uscire inserisici q): ");
                     loginId = scanner.nextLine();
@@ -82,20 +91,39 @@ public class Main {
         exit = true;
 
 
-        if (loginManager.getLoggedInUser() instanceof User) {
+        if (loginManager.getLoggedInUser() instanceof User user) {
             while (exit) {
                 switch (Util.menu(userMainMenu, scanner)) {
                     /* Comprare un libro */
                     case 1: {
 
-                        // print all the list of books
+                        // Transform the ArrayList<BookCopy> in a ArrayList<String>
+                        // to be printable in Util.menu
+                        ArrayList<String> bookString = new ArrayList<>();
 
-                        // Ask the user to insert the isbn of one book
+                        bookString.add("SCEGLI IL TUO LIBRO");
 
+                        library.getBooksForSell(true).forEach(book -> {
+                            bookString.add(book.toString(library));
+                        });
 
+                        // Ask the user choose between all the books that are avaiable for selling
+                        int index = Util.menu(bookString, scanner) - 1;
+                        BookCopy chosenBook = library.getBooksForSell(true).get(index);
+
+                        // Create new sell obj
+                        Sell newSell = new Sell(
+                                chosenBook.getIsbn(),
+                                user.getId(),
+                                library.findParentBookByIsbn(chosenBook.getParentIsbn()).getPrice(),
+                                LocalDate.now()
+                        );
+
+                        user.getSells().add(newSell);
 
                         break;
                     }
+                    /* Prendere in prestito un libro */
                     case 2: {
 
                         break;

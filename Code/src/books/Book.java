@@ -1,9 +1,11 @@
+package books;
+
 import category.Category;
 
 import java.util.ArrayList;
 
 public class Book {
-    protected String isbn;
+    private String isbn;
     protected String title;
     protected ArrayList<Author> authors;
     protected double price;
@@ -75,5 +77,16 @@ public class Book {
 
     public void setAvaiable(boolean avaiable) {
         isAvaiable = avaiable;
+    }
+
+    @Override
+    public String toString() {
+        return "Libro {" +
+                "isbn='" + isbn + "'" +
+                ", Titolo ='" + title + "'" +
+                ", Autore =" + authors + "'" +
+                ", Prezzo =" + price + "'" +
+                ", Categoria =" + category + "'" +
+                '}';
     }
 }

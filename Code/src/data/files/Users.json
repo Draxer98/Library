@@ -7,7 +7,7 @@
     "phoneNumber": 1234567890,
     "loans": [
       {
-        "isbn": "978-3-16-148410-0",
+        "isbn": "9783161484100",
         "loanDate": "01-01-2023",
         "expirationDate": "01-02-2023"
       },
@@ -19,13 +19,13 @@
     ],
     "sells": [
       {
-        "isbnSoldBook": "978-0-12-345678-9",
+        "isbnSoldBook": "9780123456789",
         "idUser": "TID123",
         "price": 25,
         "sellDate": "10-03-2023"
       },
       {
-        "isbnSoldBook": "978-9-87-654321-0",
+        "isbnSoldBook": "9789876543210",
         "idUser": "TID123",
         "price": 30,
         "sellDate": "20-03-2023"
@@ -40,14 +40,14 @@
     "phoneNumber": 9876543210,
     "loans": [
       {
-        "isbn": "978-1-84-749615-8",
+        "isbn": "9781847496158",
         "loanDate": "05-01-2023",
         "expirationDate": "05-02-2023"
       }
     ],
     "sells": [
       {
-        "isbnSoldBook": "978-1-92-837465-2",
+        "isbnSoldBook": "9781928374652",
         "idUser": "TID456",
         "price": 45,
         "sellDate": "25-03-2023"

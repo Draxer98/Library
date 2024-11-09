@@ -1,20 +1,22 @@
+package libraryMembers;
+
 public class LibraryMember {
     protected String id;
     protected String password;
 
-    protected String getId() {
+    public String getId() {
         return id;
     }
 
-    protected void setId(String id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    protected String getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    protected void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 }

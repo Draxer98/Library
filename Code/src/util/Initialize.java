@@ -1,3 +1,8 @@
+package util;
+
+import books.Author;
+import books.Book;
+import books.BookCopy;
 import category.Category;
 import data.JsonReader;
 import events.Loan;
@@ -5,6 +10,8 @@ import events.Sell;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
+import libraryMembers.Admin;
+import libraryMembers.User;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,13 +19,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-class Initialize {
+public class Initialize {
     private ArrayList<User> users;
     private ArrayList<Admin> admins;
     private ArrayList<Book> bookForLoan;
     private ArrayList<BookCopy> bookForSell;
 
-    public Initialize(String userPath, String adminPath, String loanPath, String sellPath) {
+    public Initialize(String userPath, String adminPath, String loanPath) {
         users = new ArrayList<>();
         users = loadUsersFromFile(userPath);
         admins = new ArrayList<>();
@@ -26,7 +33,7 @@ class Initialize {
         bookForLoan = new ArrayList<>();
         bookForLoan = loadBooksForLoan(loanPath);
         bookForSell = new ArrayList<>();
-        bookForSell = loadBooksForSell(sellPath);
+        bookForSell = loadBooksForSell(bookForLoan);
     }
 
 
@@ -44,7 +51,7 @@ class Initialize {
         for (Object obj : jsonArray) {
             JSONObject jsonAdmin = (JSONObject) obj;
 
-            // Create new Admin with the correct data
+            // Create new users.Admin with the correct data
             admins.add(new Admin(
                     (String) jsonAdmin.get("id"), (String) jsonAdmin.get("password")
             ));
@@ -89,7 +96,7 @@ class Initialize {
      * </pre>
      *
      * @param path the path of the JSON file from which to load user data.
-     * @return a list of `User` objects loaded from the JSON file.
+     * @return a list of `users.User` objects loaded from the JSON file.
      */
     private ArrayList<User> loadUsersFromFile(String path) {
         ArrayList<User> users = new ArrayList<>();
@@ -147,18 +154,18 @@ class Initialize {
 
     /**
      * Loads a list of books from a JSON file located at the specified path.
-     * Each book in the JSON file should follow the structure expected by the Book class,
+     * Each book in the JSON file should follow the structure expected by the books.Book class,
      * with fields for ISBN, title, authors, price, category, ISBN copies, and availability status.
      *
      * @param path the path to the JSON file containing the array of books
-     * @return an ArrayList of Book objects loaded from the JSON file,
+     * @return an ArrayList of books.Book objects loaded from the JSON file,
      *         or null if the file could not be read or parsed
      * @throws IOException if an I/O error occurs while reading the file
      * @throws ParseException if the JSON data cannot be parsed
      * @throws IllegalArgumentException if the category string cannot be converted to a Category enum
      */
     public ArrayList<Book> loadBooksForLoan(String path) {
-        // Crea una lista per memorizzare gli oggetti Book caricati dal file JSON
+        // Crea una lista per memorizzare gli oggetti books.Book caricati dal file JSON
         ArrayList<Book> books = new ArrayList<>();
         JSONArray jsonArray = null;
 
@@ -180,7 +187,7 @@ class Initialize {
             String isbn = (String) bookJson.get("isbn");
             String title = (String) bookJson.get("title");
 
-            // Estrazione degli autori (JSONArray), che viene convertito in una lista di oggetti Author
+            // Estrazione degli autori (JSONArray), che viene convertito in una lista di oggetti books.Author
             JSONArray authorsArray = (JSONArray) bookJson.get("authors");
             ArrayList<Author> authors = new ArrayList<>();
             for (Object authorObj : authorsArray) {
@@ -192,12 +199,12 @@ class Initialize {
             }
 
             // Estrae il prezzo del libro come double
-            double price = (double) bookJson.get("price");
+            double price = ((Number) bookJson.get("price")).doubleValue();
 
             // Estrazione della categoria del libro, convertendola in un valore dell'enum Category
             Category category = Category.valueOf((String) bookJson.get("category"));
 
-            // Crea un nuovo oggetto Book con i dati estratti
+            // Crea un nuovo oggetto books.Book con i dati estratti
             Book book = new Book(isbn, title, authors, price, category);
 
             // Estrazione dei numeri ISBN per le copie del libro (JSONArray di stringhe)
@@ -219,8 +226,16 @@ class Initialize {
         return books;
     }
 
-    private ArrayList<BookCopy> loadBooksForSell(String sellPath) {
-        return null;
+    private ArrayList<BookCopy> loadBooksForSell(ArrayList<Book> b) {
+        ArrayList<BookCopy> books = new ArrayList<>();
+
+        for (Book book : b) {
+            for (String isbnBookCopy : book.getIsbnCopyBook()) {
+                books.add(new BookCopy(isbnBookCopy, book.getIsbn()));
+            }
+        }
+
+        return books;
     }
 
     public ArrayList<User> getUsers() {

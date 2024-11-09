@@ -1,6 +1,12 @@
+package util;
+
+import libraryMembers.Admin;
+import libraryMembers.LibraryMember;
+import libraryMembers.User;
+
 import java.util.ArrayList;
 
-class LoginManager {
+public class LoginManager {
     private ArrayList<User> users;
     private ArrayList<Admin> admins;
     private LibraryMember loggedInUser;
