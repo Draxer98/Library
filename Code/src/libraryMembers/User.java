@@ -1,12 +1,12 @@
+package libraryMembers;
+
 import events.Loan;
 import events.Sell;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 
-public class User {
-    private String id;
-    private String password;
+public class User extends LibraryMember {
     private String name;
     private String surname;
     private long phoneNumber;
@@ -35,22 +35,6 @@ public class User {
 
     public User(String id, String password) {
         this.id = id;
-        this.password = password;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -100,14 +84,14 @@ public class User {
 
     @Override
     public String toString() {
-        return "User: " +
-                "id='" + id + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", phoneNumber=" + phoneNumber +
-                ", loans=" + loans +
-                ", sells=" + sells;
+        return "Utente: " +
+                "id='" + id + "'" +
+                ", password ='" + password + "'" +
+                ", nome = '" + name + "'" +
+                ", cognome = '" + surname + "'" +
+                ", Numero di telefono = '" + phoneNumber + "'" +
+                ", Prestiti = '" + loans + "'" +
+                ", Acquisti = '" + sells + "'";
     }
 
     public JSONObject toJson() {

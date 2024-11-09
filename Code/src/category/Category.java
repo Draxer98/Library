@@ -1,6 +1,7 @@
 package category;
 
-public class Category {
-    private String id;
-    private CategoryType type;
+public enum Category {
+    CAT1,
+    CAT2,
+    CAT3,
 }

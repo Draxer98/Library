@@ -1,13 +1,26 @@
+import books.BookCopy;
+import events.Sell;
+import libraryMembers.User;
+import util.Initialize;
+import util.Library;
+import util.LoginManager;
 import util.Util;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        Initialize initialize = new Initialize("src/data/files/Users.json");
-        LoginManager loginManager = new LoginManager(initialize.getUsers());
+        Initialize initialize = new Initialize(
+                "src/data/files/Users.json",
+                "src/data/files/users.Admin.json",
+                "src/data/files/BooksForLoan.json"
+        );
+        LoginManager loginManager = new LoginManager(initialize.getUsers(), initialize.getAdmins());
+        Library library = new Library(initialize.getBookForLoan(), initialize.getBookForSell());
 
         String[] loginMenu = {
                 "BENVENUTO",
@@ -15,7 +28,7 @@ public class Main {
                 "Esci"
         };
 
-        String[] mainMenu = {
+        String[] userMainMenu = {
                 "LIBRERIA",
                 "Comprare un libro",
                 "Prendere in prestito un libro",
@@ -27,7 +40,7 @@ public class Main {
                 "Esci",
         };
 
-        String[] sellBookMenu = {
+        String[] buyBookMenu = {
                 "COMPRA UN LIBRO",
                 "Inseisci le informazioni del libro da comprare",
                 "Visualizzare libri disponibili",
@@ -42,12 +55,14 @@ public class Main {
         };
 
         boolean exit = true;
-        String loginId, loginPassword;
+
 
         /* LOGIN PROCESS */
         while (exit) {
             switch (Util.menu(loginMenu, scanner)) {
                 case 1: {
+                    String loginId, loginPassword;
+
                     // Insert id
                     System.out.print("Inserisci il tuo id (se vuoi uscire inserisici q): ");
                     loginId = scanner.nextLine();
@@ -75,10 +90,71 @@ public class Main {
 
         exit = true;
 
-        while (exit) {
-            switch (Util.menu(mainMenu, scanner)) {
 
+        if (loginManager.getLoggedInUser() instanceof User user) {
+            while (exit) {
+                switch (Util.menu(userMainMenu, scanner)) {
+                    /* Comprare un libro */
+                    case 1: {
+
+                        // Transform the ArrayList<BookCopy> in a ArrayList<String>
+                        // to be printable in Util.menu
+                        ArrayList<String> bookString = new ArrayList<>();
+
+                        bookString.add("SCEGLI IL TUO LIBRO");
+
+                        library.getBooksForSell(true).forEach(book -> {
+                            bookString.add(book.toString(library));
+                        });
+
+                        // Ask the user choose between all the books that are avaiable for selling
+                        int index = Util.menu(bookString, scanner) - 1;
+                        BookCopy chosenBook = library.getBooksForSell(true).get(index);
+
+                        // Create new sell obj
+                        Sell newSell = new Sell(
+                                chosenBook.getIsbn(),
+                                user.getId(),
+                                library.findParentBookByIsbn(chosenBook.getParentIsbn()).getPrice(),
+                                LocalDate.now()
+                        );
+
+                        user.getSells().add(newSell);
+
+                        break;
+                    }
+                    /* Prendere in prestito un libro */
+                    case 2: {
+
+                        break;
+                    }
+                    case 3: {
+
+                        break;
+                    }
+                    case 4: {
+
+                        break;
+                    }
+                    case 5: {
+
+                        break;
+                    }
+                    case 6: {
+
+                        break;
+                    }
+                    case 7: {
+
+                        break;
+                    }
+                    default: {
+                        exit = false;
+                    }
+                }
             }
+        } else {
+            /* ADMIN STUFF */
         }
     }
 }
