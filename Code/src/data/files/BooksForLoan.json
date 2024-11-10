@@ -29,6 +29,6 @@
     "price": 19.99,
     "category": "CAT2",
     "isbnCopyBook": ["9780987654321", "9780987654322"],
-    "isAvailable": false
+    "isAvailable": true
   }
 ]

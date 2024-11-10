@@ -48,13 +48,11 @@ public class Library {
 
         if (withoutDuplicates) {
             booksForSell.forEach(book -> {
-                // Verifica se l'oggetto precedente è diverso da quello attuale
-
-                System.out.println(!previous[0].equals(book));
+                // Verify if the previous obj is equals to the current one
                 if (!previous[0].equals(book)) {
                     books.add(book);
                 }
-                // Imposta 'previous' come il libro corrente per il prossimo ciclo
+                // Set previous as the current book
                 previous[0] = book;
             });
 

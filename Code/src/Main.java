@@ -1,4 +1,6 @@
+import books.Book;
 import books.BookCopy;
+import events.Loan;
 import events.Sell;
 import libraryMembers.User;
 import util.Initialize;
@@ -96,6 +98,10 @@ public class Main {
                 switch (Util.menu(userMainMenu, scanner)) {
                     /* Comprare un libro */
                     case 1: {
+                        if (library.getBooksForSell(false).isEmpty()) {
+                            System.out.println("Non ci sono libri. Disponibili per la vendita'");
+                            break;
+                        }
 
                         // Transform the ArrayList<BookCopy> in a ArrayList<String>
                         // to be printable in Util.menu
@@ -106,6 +112,11 @@ public class Main {
                         library.getBooksForSell(true).forEach(book -> {
                             bookString.add(book.toString(library));
                         });
+
+                        if (bookString.size() == 1) {
+                            System.out.println("Non ci sono libri. Disponibili per il perstito");
+                            break;
+                        }
 
                         // Ask the user choose between all the books that are avaiable for selling
                         int index = Util.menu(bookString, scanner) - 1;
@@ -119,16 +130,53 @@ public class Main {
                                 LocalDate.now()
                         );
 
+                        // Add the new sell in the ArrayList of the user
                         user.getSells().add(newSell);
+
+                        // Delete the sell book
+                        library.getBooksForSell(false).remove(chosenBook);
 
                         break;
                     }
                     /* Prendere in prestito un libro */
                     case 2: {
+                        if (library.getBooksForLoan().isEmpty()) {
+                            System.out.println("Non ci sono libri. Disponibili per il perstito");
+                            break;
+                        }
+
+                        ArrayList<String> bookString = new ArrayList<>();
+
+                        bookString.add("SCEGLI IL TUO LIBRO");
+
+                        library.getBooksForLoan().forEach(book -> {
+                            if (book.isAvaiable()) {
+                                bookString.add(book.toString());
+                            }
+                        });
+
+                        if (bookString.size() == 1) {
+                            System.out.println("Non ci sono libri. Disponibili per il perstito");
+                            break;
+                        }
+
+                        int index = Util.menu(bookString, scanner) - 1;
+                        Book chosenBook = library.getBooksForLoan().get(index);
+
+                        Loan newLoan = new Loan(
+                                chosenBook.getIsbn(),
+                                LocalDate.now(),
+                                LocalDate.now().plusDays(30)
+                        );
+
+                        user.getLoans().add(newLoan);
+
+                        library.getBooksForLoan().remove(chosenBook);
 
                         break;
                     }
                     case 3: {
+
 
                         break;
                     }
