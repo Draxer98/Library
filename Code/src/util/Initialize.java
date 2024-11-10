@@ -135,7 +135,6 @@ public class Initialize {
 
                 sells.add(new Sell(
                         (String) jsonSell.get("isbnSoldBook"),
-                        (String) jsonSell.get("idUser"),
                         ((Number) jsonSell.get("price")).doubleValue(),
                         LocalDate.parse((String) jsonSell.get("sellDate"), DateTimeFormatter.ofPattern("dd-MM-yyyy"))
                 ));

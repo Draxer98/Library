@@ -35,7 +35,6 @@ public class Main {
                 "Comprare un libro",
                 "Prendere in prestito un libro",
                 "Visualizza prestiti correnti",
-                "Visualizza storico prestiti",
                 "Visualizza storico vendite",
                 "Estendere la data di consegna di un libro",
                 "Info account",
@@ -137,7 +136,6 @@ public class Main {
                         // Create new sell obj
                         Sell newSell = new Sell(
                                 chosenBook.getIsbn(),
-                                user.getId(),
                                 library.findParentBookByIsbn(chosenBook.getParentIsbn()).getPrice(),
                                 LocalDate.now()
                         );
@@ -198,19 +196,24 @@ public class Main {
 
                         break;
                     }
+                    /* Visualizza storico vendite */
                     case 4: {
+                        System.out.println("===============");
+                        System.out.println("STORICO VENDITE");
+                        System.out.println("===============");
+
+                        user.getSells().forEach(System.out::println);
 
                         break;
                     }
+                    /* Estendere la data di consegna di un libro */
                     case 5: {
 
-                        break;
-                    }
-                    case 6: {
 
                         break;
                     }
-                    case 7: {
+                    /* Info account */
+                    case 6: {
 
                         break;
                     }
