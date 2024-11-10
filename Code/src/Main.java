@@ -69,9 +69,17 @@ public class Main {
                     System.out.print("Inserisci il tuo id (se vuoi uscire inserisici q): ");
                     loginId = scanner.nextLine();
 
+                    if (loginId.equals("q")) {
+                        break;
+                    }
+
                     // Insert password
                     System.out.print("Inserisci il tuo password (se vuoi uscire inserisici q): ");
                     loginPassword = scanner.nextLine();
+
+                    if (loginPassword.equals("q")) {
+                        break;
+                    }
 
                     if (loginManager.login(loginId, loginPassword)) {
                         System.out.println("Login effettuato con successo");
@@ -109,10 +117,14 @@ public class Main {
 
                         bookString.add("SCEGLI IL TUO LIBRO");
 
+                        // Transform every book copy into a string
                         library.getBooksForSell(true).forEach(book -> {
                             bookString.add(book.toString(library));
                         });
 
+                        // if the size of the final array is
+                        // it means that there is only the title
+                        // so there aren't books
                         if (bookString.size() == 1) {
                             System.out.println("Non ci sono libri. Disponibili per il perstito");
                             break;
@@ -146,15 +158,18 @@ public class Main {
                         }
 
                         ArrayList<String> bookString = new ArrayList<>();
-
                         bookString.add("SCEGLI IL TUO LIBRO");
 
+                        // Transform only the available books into a string
                         library.getBooksForLoan().forEach(book -> {
                             if (book.isAvaiable()) {
                                 bookString.add(book.toString());
                             }
                         });
 
+                        // if the size of the final array is
+                        // it means that there is only the title
+                        // so there aren't books
                         if (bookString.size() == 1) {
                             System.out.println("Non ci sono libri. Disponibili per il perstito");
                             break;
@@ -169,14 +184,17 @@ public class Main {
                                 LocalDate.now().plusDays(30)
                         );
 
+                        System.out.println("Dovrai restituire il libro in data " + LocalDate.now().plusDays(30).toString());
+
                         user.getLoans().add(newLoan);
 
                         library.getBooksForLoan().remove(chosenBook);
 
                         break;
                     }
+                    /* Visualizza prestiti correnti */
                     case 3: {
-
+                        user.getLoans().forEach(System.out::println);
 
                         break;
                     }

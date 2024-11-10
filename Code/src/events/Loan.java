@@ -36,4 +36,13 @@ public class Loan {
     public void setExpirationDate(LocalDate expirationDate) {
         this.expirationDate = expirationDate;
     }
+
+    @Override
+    public String toString() {
+        return "Prestito {" +
+                "isbn libro preso = '" + isbn + "'" +
+                ", Data di prestito = '" + loanDate.toString() + "'" +
+                ", Data di consegna = '" + expirationDate.toString() + "'" +
+                "}";
+    }
 }
