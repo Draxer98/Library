@@ -13,6 +13,10 @@ public class Loan {
         this.expirationDate = expirationDate;
     }
 
+    public void extendExpirationDate() {
+        expirationDate.plusDays(30);
+    }
+
     public String getIsbn() {
         return isbn;
     }

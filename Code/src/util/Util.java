@@ -1,14 +1,13 @@
 package util;
 
+import events.Loan;
+import events.Sell;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Util {
-
-    static Scanner scanner = new Scanner(System.in);
-
-    private Util() {
-    }
+    private Util() {}
 
     public static void clrScr() {
         try {
@@ -24,6 +23,28 @@ public class Util {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static ArrayList<String> getSellMenu(ArrayList<Sell> sells) {
+        ArrayList<String> sellString = new ArrayList<>();
+        sellString.add("SCEGLI IL TUO LIBRO");
+
+        sells.forEach(sell -> {
+            sellString.add(sell.toString());
+        });
+
+        return sellString;
+    }
+
+    public static ArrayList<String> getLoanMenu(ArrayList<Loan> loans) {
+        ArrayList<String> loansString = new ArrayList<>();
+        loansString.add("SCEGLI IL TUO LIBRO");
+
+        loans.forEach(sell -> {
+            loansString.add(sell.toString());
+        });
+
+        return loansString;
     }
 
     public static int menu(String[] options, Scanner scanner) {

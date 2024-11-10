@@ -36,22 +36,7 @@ public class Main {
                 "Prendere in prestito un libro",
                 "Visualizza prestiti correnti",
                 "Visualizza storico vendite",
-                "Estendere la data di consegna di un libro",
                 "Info account",
-                "Esci",
-        };
-
-        String[] buyBookMenu = {
-                "COMPRA UN LIBRO",
-                "Inseisci le informazioni del libro da comprare",
-                "Visualizzare libri disponibili",
-                "Esci",
-        };
-
-        String[] loanBookMenu = {
-                "PRENDI IN PRESTITO UN LIBRO",
-                "Inserire informazioni del libro da prendere in prestito",
-                "Visualizzare libri disponibili",
                 "Esci",
         };
 
@@ -206,14 +191,13 @@ public class Main {
 
                         break;
                     }
-                    /* Estendere la data di consegna di un libro */
-                    case 5: {
-
-
-                        break;
-                    }
                     /* Info account */
-                    case 6: {
+                    case 5: {
+                        System.out.println("============");
+                        System.out.println("INFO ACCOUNT");
+                        System.out.println("============");
+
+                        System.out.println(user.toString());
 
                         break;
                     }

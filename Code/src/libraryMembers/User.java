@@ -82,16 +82,40 @@ public class User extends LibraryMember {
         return false;
     }
 
+    private String loansToString() {
+        StringBuilder a = new StringBuilder();
+
+        a.append("\n");
+
+        for (Loan loan : loans) {
+            a.append("\t\t").append(loan.toString()).append("\n");
+        }
+
+        return a.toString();
+    }
+
+    private String sellsToString() {
+        StringBuilder a = new StringBuilder();
+
+        a.append("\n");
+
+        for (Sell sell : sells) {
+            a.append("\t\t").append(sell.toString()).append(",\n");
+        }
+
+        return a.toString();
+    }
+
     @Override
     public String toString() {
-        return "Utente: " +
-                "id='" + id + "'" +
-                ", password ='" + password + "'" +
-                ", nome = '" + name + "'" +
-                ", cognome = '" + surname + "'" +
-                ", Numero di telefono = '" + phoneNumber + "'" +
-                ", Prestiti = '" + loans + "'" +
-                ", Acquisti = '" + sells + "'";
+        return "Utente: \n" +
+                "\tid = '" + id + "'\n" +
+                "\tpassword = '" + password + "'\n" +
+                "\tnome = '" + name + "'\n" +
+                "\tcognome = '" + surname + "'\n" +
+                "\tNumero di telefono = '" + phoneNumber + "'\n" +
+                "\tPrestiti = [" + loansToString() + "\t]," + "\n" +
+                "\tVendite = [" + sellsToString() + "\t]" + "\n";
     }
 
     public JSONObject toJson() {
