@@ -12,8 +12,8 @@ public class LoginManager {
     private LibraryMember loggedInUser;
 
     public LoginManager(ArrayList<User> users, ArrayList<Admin> admins) {
-        this.users = users;
-        this.admins = admins;
+        this.users = users == null ? new ArrayList<>() : users;
+        this.admins = admins == null ? new ArrayList<>() : admins;
         this.loggedInUser = null;
     }
 
