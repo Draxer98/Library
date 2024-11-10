@@ -1,5 +1,7 @@
 package util;
 
+import books.Book;
+import books.BookCopy;
 import events.Loan;
 import events.Sell;
 
@@ -40,11 +42,38 @@ public class Util {
         ArrayList<String> loansString = new ArrayList<>();
         loansString.add("SCEGLI IL TUO LIBRO");
 
-        loans.forEach(sell -> {
-            loansString.add(sell.toString());
+        loans.forEach(loan -> {
+            loansString.add(loan.toString());
         });
 
         return loansString;
+    }
+
+    public static ArrayList<String> bookForLoanToMenu(ArrayList<Book> booksForLoan) {
+        ArrayList<String> bookString = new ArrayList<>();
+        bookString.add("SCEGLI IL TUO LIBRO");
+
+        // Transform only the available books into a string
+        booksForLoan.forEach(book -> {
+            if (book.isAvaiable()) {
+                bookString.add(book.toString());
+            }
+        });
+
+        return bookString;
+    }
+
+    public static ArrayList<String> bookForSellToMenu(ArrayList<BookCopy> booksForSell, Library library) {
+        ArrayList<String> bookString = new ArrayList<>();
+
+        bookString.add("SCEGLI IL TUO LIBRO");
+
+        // Transform every book copy into a string
+        booksForSell.forEach(book -> {
+            bookString.add(book.toString(library));
+        });
+
+        return bookString;
     }
 
     public static int menu(String[] options, Scanner scanner) {
@@ -116,4 +145,6 @@ public class Util {
 
         return scelta;
     }
+
+
 }

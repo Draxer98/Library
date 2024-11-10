@@ -97,14 +97,7 @@ public class Main {
 
                         // Transform the ArrayList<BookCopy> in a ArrayList<String>
                         // to be printable in Util.menu
-                        ArrayList<String> bookString = new ArrayList<>();
-
-                        bookString.add("SCEGLI IL TUO LIBRO");
-
-                        // Transform every book copy into a string
-                        library.getBooksForSell(true).forEach(book -> {
-                            bookString.add(book.toString(library));
-                        });
+                        ArrayList<String> bookString = Util.bookForSellToMenu(library.getBooksForSell(true), library);
 
                         // if the size of the final array is
                         // it means that there is only the title
@@ -140,15 +133,7 @@ public class Main {
                             break;
                         }
 
-                        ArrayList<String> bookString = new ArrayList<>();
-                        bookString.add("SCEGLI IL TUO LIBRO");
-
-                        // Transform only the available books into a string
-                        library.getBooksForLoan().forEach(book -> {
-                            if (book.isAvaiable()) {
-                                bookString.add(book.toString());
-                            }
-                        });
+                        ArrayList<String> bookString = Util.bookForLoanToMenu(library.getBooksForLoan());
 
                         // if the size of the final array is
                         // it means that there is only the title
