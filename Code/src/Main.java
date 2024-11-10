@@ -119,7 +119,7 @@ public class Main {
                         );
 
                         // Add the new sell in the ArrayList of the user
-                        user.getSells().add(newSell);
+                        user.addSell(newSell);
 
                         // Delete the sell book
                         library.getBooksForSell(false).remove(chosenBook);
@@ -154,7 +154,7 @@ public class Main {
 
                         System.out.println("Dovrai restituire il libro in data " + LocalDate.now().plusDays(30).toString());
 
-                        user.getLoans().add(newLoan);
+                        user.addLoan(newLoan);
 
                         library.getBooksForLoan().remove(chosenBook);
 

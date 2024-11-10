@@ -29,8 +29,6 @@ public class Library {
         return null;
     }
 
-
-
     public void addBookForLoan(Book b) {
         this.booksForLoan.add(b);
     }

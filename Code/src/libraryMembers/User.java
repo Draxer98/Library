@@ -38,6 +38,14 @@ public class User extends LibraryMember {
         this.password = password;
     }
 
+    public void addLoan(Loan loan) {
+        this.loans.add(loan);
+    }
+
+    public void addSell(Sell sell) {
+        this.sells.add(sell);
+    }
+
     public String getName() {
         return name;
     }
