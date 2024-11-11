@@ -2,6 +2,9 @@ import books.Book;
 import books.BookCopy;
 import events.Loan;
 import events.Sell;
+import excepetions.DuplicatePhoneNumberException;
+import excepetions.IllegalLengthForNumberException;
+import handler.RegistrationHandler;
 import libraryMembers.User;
 import util.Initialize;
 import util.Library;
@@ -18,11 +21,13 @@ public class Main {
 
         Initialize initialize = new Initialize(
                 "src/data/files/Users.json",
-                "src/data/files/users.Admin.json",
-                "src/data/files/BooksForLoan.json"
+                "src/data/files/Admin.json",
+                "src/data/files/BooksForLoan.json",
+                "src/data/files/idNumber.json"
         );
         LoginManager loginManager = new LoginManager(initialize.getUsers(), initialize.getAdmins());
         Library library = new Library(initialize.getBookForLoan(), initialize.getBookForSell());
+        RegistrationHandler registrationHandler = new RegistrationHandler(initialize.getUsers(), initialize.getAdmins());
 
         String[] loginMenu = {
                 "BENVENUTO",
@@ -38,6 +43,19 @@ public class Main {
                 "Visualizza storico vendite",
                 "Info account",
                 "Esci",
+        };
+
+        String[] adminMainMenu = {
+                "LIBRERIA",
+                "Registrazione utenti",
+                "Registrazione admin",
+                "Visualizza tutti utenti",
+                "Cerca ID",
+                "Visualizzazione dei prestiti",
+                "Inserimento libro",
+                "Cancella libro",
+                "Esistenza libro",
+                "Esci"
         };
 
         boolean exit = true;
@@ -89,7 +107,7 @@ public class Main {
             while (exit) {
                 switch (Util.menu(userMainMenu, scanner)) {
                     /* Comprare un libro */
-                    case 1: {
+                    case 1 -> {
                         if (library.getBooksForSell(false).isEmpty()) {
                             System.out.println("Non ci sono libri. Disponibili per la vendita'");
                             break;
@@ -123,11 +141,9 @@ public class Main {
 
                         // Delete the sell book
                         library.getBooksForSell(false).remove(chosenBook);
-
-                        break;
                     }
                     /* Prendere in prestito un libro */
-                    case 2: {
+                    case 2 -> {
                         if (library.getBooksForLoan().isEmpty()) {
                             System.out.println("Non ci sono libri. Disponibili per il perstito");
                             break;
@@ -157,42 +173,98 @@ public class Main {
                         user.addLoan(newLoan);
 
                         library.getBooksForLoan().remove(chosenBook);
-
-                        break;
                     }
                     /* Visualizza prestiti correnti */
-                    case 3: {
+                    case 3 -> {
                         user.getLoans().forEach(System.out::println);
-
-                        break;
                     }
                     /* Visualizza storico vendite */
-                    case 4: {
+                    case 4 -> {
                         System.out.println("===============");
                         System.out.println("STORICO VENDITE");
                         System.out.println("===============");
 
                         user.getSells().forEach(System.out::println);
-
-                        break;
                     }
                     /* Info account */
-                    case 5: {
+                    case 5 -> {
                         System.out.println("============");
                         System.out.println("INFO ACCOUNT");
                         System.out.println("============");
 
                         System.out.println(user.toString());
-
-                        break;
                     }
-                    default: {
+                    default -> {
                         exit = false;
                     }
                 }
             }
         } else {
-            /* ADMIN STUFF */
+            while (exit) {
+                switch (Util.menu(adminMainMenu, scanner)) {
+
+                    case 1 -> {
+                        // nome
+                        System.out.println("Inserisci il nome: ");
+                        String name = scanner.nextLine();
+
+                        // cognome
+                        System.out.println("Inserisci il congome: ");
+                        String surname = scanner.nextLine();
+
+                        long phoneNumber;
+
+                        // phone Number
+                        while (true) {
+                            try {
+                                System.out.println("Inserisci il numero di telefono: ");
+                                phoneNumber = Long.parseLong(scanner.nextLine());
+
+                                // verify
+                                registrationHandler.verifyPhoneNumber(phoneNumber);
+
+                                break;
+                            } catch (IllegalLengthForNumberException | DuplicatePhoneNumberException e) {
+                                System.out.println(e.getMessage());
+                            } catch (Exception e) {
+                                System.out.println("Il valore deve essere solo numerico");
+                            }
+                        }
+
+                        String id = "U" + initialize.getIdNumber();
+
+                        String password = registrationHandler.generateRandomPassword();
+
+                        User newUser = new User(id, password, name, surname, phoneNumber);
+
+                        initialize.addUser(newUser);
+                    }
+                    case 2 -> {
+
+                    }
+                    case 3 -> {
+
+                    }
+                    case 4 -> {
+
+                    }
+                    case 5 -> {
+
+                    }
+                    case 6 -> {
+
+                    }
+                    case 7 -> {
+
+                    }
+                    case 8 -> {
+
+                    }
+                    default -> {
+                        exit = false;
+                    }
+                }
+            }
         }
     }
 }

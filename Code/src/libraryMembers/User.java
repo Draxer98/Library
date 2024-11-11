@@ -7,35 +7,19 @@ import org.json.simple.JSONObject;
 import java.util.ArrayList;
 
 public class User extends LibraryMember {
-    private String name;
-    private String surname;
-    private long phoneNumber;
     private ArrayList<Loan> loans;
     private ArrayList<Sell> sells;
 
     public User(String id, String password, String name, String surname, long phoneNumber, ArrayList<Loan> loans, ArrayList<Sell> sells) {
-         this.id = id;
-         this.password = password;
-         this.name = name;
-         this.surname = surname;
-         this.phoneNumber = phoneNumber;
-         this.loans = loans;
-         this.sells = sells;
+        super(id, password, name, surname, phoneNumber);
+        this.loans = loans == null ? new ArrayList<>() : loans;
+        this.sells = sells == null ? new ArrayList<>() : sells;
     }
 
-    public User(String id, String password, String name, String surname, int phoneNumber) {
-        this.id = id;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-        this.phoneNumber = phoneNumber;
-        this.loans = new ArrayList<>();
+    public User(String id, String password, String name, String surname, long phoneNumber) {
+        super(id, password, name, surname, phoneNumber);
         this.sells = new ArrayList<>();
-    }
-
-    public User(String id, String password) {
-        this.id = id;
-        this.password = password;
+        this.loans = new ArrayList<>();
     }
 
     public void addLoan(Loan loan) {
@@ -44,30 +28,6 @@ public class User extends LibraryMember {
 
     public void addSell(Sell sell) {
         this.sells.add(sell);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public long getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(long phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public ArrayList<Loan> getLoans() {

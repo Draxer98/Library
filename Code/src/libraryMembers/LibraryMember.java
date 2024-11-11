@@ -3,6 +3,17 @@ package libraryMembers;
 public class LibraryMember {
     protected String id;
     protected String password;
+    protected String name;
+    protected String surname;
+    protected long phoneNumber;
+
+    public LibraryMember(String id, String password, String name, String surname, long phoneNumber) {
+        this.id = id;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getId() {
         return id;
@@ -18,5 +29,13 @@ public class LibraryMember {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(long phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

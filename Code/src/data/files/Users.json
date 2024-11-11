@@ -31,27 +31,5 @@
         "sellDate": "20-03-2023"
       }
     ]
-  },
-  {
-    "id": "TID456",
-    "password": "TPW456",
-    "name": "Jane",
-    "surname": "Smith",
-    "phoneNumber": 9876543210,
-    "loans": [
-      {
-        "isbn": "9781847496158",
-        "loanDate": "05-01-2023",
-        "expirationDate": "05-02-2023"
-      }
-    ],
-    "sells": [
-      {
-        "isbnSoldBook": "9781928374652",
-        "idUser": "TID456",
-        "price": 45,
-        "sellDate": "25-03-2023"
-      }
-    ]
   }
 ]

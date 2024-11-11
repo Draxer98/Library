@@ -24,20 +24,41 @@ public class Initialize {
     private ArrayList<Admin> admins;
     private ArrayList<Book> bookForLoan;
     private ArrayList<BookCopy> bookForSell;
+    private int idNumber;
+    private boolean modifyed = false;
 
-    public Initialize(String userPath, String adminPath, String loanPath) {
+    public Initialize(String userPath, String adminPath, String loanPath, String pathIdNumber) {
         users = new ArrayList<>();
         users = loadUsersFromFile(userPath);
+
         admins = new ArrayList<>();
         admins = loadAdminsFromFile(adminPath);
+
         bookForLoan = new ArrayList<>();
         bookForLoan = loadBooksForLoan(loanPath);
-        bookForSell = new ArrayList<>();
-        bookForSell = loadBooksForSell(bookForLoan);
+
+        bookForSell = bookForLoan != null ? loadBooksForSell(bookForLoan) : new ArrayList<>();
+
+        this.idNumber = loadIsNumber(pathIdNumber);
     }
 
+    private int loadIsNumber(String pathIdNumber) {
+        int num;
 
-    private ArrayList<Admin> loadAdminsFromFile(String path) {
+        JSONObject file;
+
+        try {
+            file = JsonReader.readObj(pathIdNumber);
+        } catch (Exception e) {
+            return -1;
+        }
+
+        num = ((Number) file.get("num")).intValue();
+
+        return num;
+    }
+
+    private static ArrayList<Admin> loadAdminsFromFile(String path) {
         ArrayList<Admin> admins = new ArrayList<>();
         JSONArray jsonArray;
 
@@ -53,7 +74,11 @@ public class Initialize {
 
             // Create new users.Admin with the correct data
             admins.add(new Admin(
-                    (String) jsonAdmin.get("id"), (String) jsonAdmin.get("password")
+                    (String) jsonAdmin.get("id"),
+                    (String) jsonAdmin.get("password"),
+                    (String) jsonAdmin.get("name"),
+                    (String) jsonAdmin.get("surname"),
+                    ((Number) jsonAdmin.get("phoneNumber")).longValue()
             ));
         }
 
@@ -98,7 +123,7 @@ public class Initialize {
      * @param path the path of the JSON file from which to load user data.
      * @return a list of `users.User` objects loaded from the JSON file.
      */
-    private ArrayList<User> loadUsersFromFile(String path) {
+    private static ArrayList<User> loadUsersFromFile(String path) {
         ArrayList<User> users = new ArrayList<>();
         JSONArray jsonArray;
 
@@ -143,7 +168,7 @@ public class Initialize {
             users.add(new User(
                     (String) jsonUser.get("id"), (String) jsonUser.get("password"),
                     (String) jsonUser.get("name"), (String) jsonUser.get("surname"),
-                    ((Number) jsonUser.get("phoneNumber")).intValue(),
+                    ((Number) jsonUser.get("phoneNumber")).longValue(),
                     loans, sells
             ));
         }
@@ -163,7 +188,7 @@ public class Initialize {
      * @throws ParseException if the JSON data cannot be parsed
      * @throws IllegalArgumentException if the category string cannot be converted to a Category enum
      */
-    public ArrayList<Book> loadBooksForLoan(String path) {
+    private static ArrayList<Book> loadBooksForLoan(String path) {
         // Crea una lista per memorizzare gli oggetti books.Book caricati dal file JSON
         ArrayList<Book> books = new ArrayList<>();
         JSONArray jsonArray = null;
@@ -225,7 +250,7 @@ public class Initialize {
         return books;
     }
 
-    private ArrayList<BookCopy> loadBooksForSell(ArrayList<Book> b) {
+    private static ArrayList<BookCopy> loadBooksForSell(ArrayList<Book> b) {
         ArrayList<BookCopy> books = new ArrayList<>();
 
         for (Book book : b) {
@@ -241,8 +266,18 @@ public class Initialize {
         return users;
     }
 
+    public void addUser(User user) {
+        users.add(user);
+        modifyed = true;
+    }
+
     public ArrayList<Admin> getAdmins() {
         return admins;
+    }
+
+    public void addAdmin(Admin admin) {
+        admins.add(admin);
+        modifyed = true;
     }
 
     public ArrayList<Book> getBookForLoan() {
@@ -251,5 +286,9 @@ public class Initialize {
 
     public ArrayList<BookCopy> getBookForSell() {
         return bookForSell;
+    }
+
+    public int getIdNumber() {
+        return idNumber;
     }
 }
