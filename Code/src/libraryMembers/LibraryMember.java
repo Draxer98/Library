@@ -38,4 +38,15 @@ public class LibraryMember {
     public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Membro libreria: {" + "\n" +
+                "\tId = '" + id + "\n" +
+                "\tPassword = '" + password + "\n" +
+                "\tNome = '" + name + "\n" +
+                "\tCognome = '" + surname + "\n" +
+                "\tNumero di telefono = '" + phoneNumber + "\n" +
+                "}";
+    }
 }

@@ -243,7 +243,9 @@ public class Main {
 
                     }
                     case 3 -> {
+                        initialize.getUsers().forEach(System.out::println);
 
+                        initialize.getAdmins().forEach(System.out::println);
                     }
                     case 4 -> {
 

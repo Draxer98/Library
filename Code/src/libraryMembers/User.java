@@ -76,14 +76,15 @@ public class User extends LibraryMember {
 
     @Override
     public String toString() {
-        return "Utente: \n" +
+        return "Utente: {" + "\n" +
                 "\tid = '" + id + "'\n" +
                 "\tpassword = '" + password + "'\n" +
                 "\tnome = '" + name + "'\n" +
                 "\tcognome = '" + surname + "'\n" +
                 "\tNumero di telefono = '" + phoneNumber + "'\n" +
                 "\tPrestiti = [" + loansToString() + "\t]," + "\n" +
-                "\tVendite = [" + sellsToString() + "\t]" + "\n";
+                "\tVendite = [" + sellsToString() + "\t]" + "\n" +
+                "}";
     }
 
     public JSONObject toJson() {
