@@ -2,6 +2,10 @@ package books;
 
 import util.Library;
 
+/**
+ * This class rapresents the book that can be sold.
+ * It has the isbn and the isbn of the parent book.
+ */
 public class BookCopy {
     private String isbn;
     private String parentIsbn;
@@ -36,6 +40,9 @@ public class BookCopy {
         return false;
     }
 
+    /**
+     * This toString method takes the library to get the information about the parent {@link Book}
+     */
     public String toString(Library library) {
         Book parentBook = library.findParentBookByIsbn(parentIsbn);
 

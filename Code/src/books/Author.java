@@ -2,6 +2,10 @@ package books;
 
 import java.util.ArrayList;
 
+/**
+ * The {@code Author} class represents an author of books.
+ * An author has an identifier, a first name, a last name, and a list of books they have written.
+ */
 public class Author {
     private String id;
     private String name;

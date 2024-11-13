@@ -4,6 +4,11 @@ import category.Category;
 
 import java.util.ArrayList;
 
+/**
+ * This class rappresent a book that can be loaned to a user.
+ * It has some attributes such as isbn, title, authors, price, category, 
+ * isAvaiable to check if is avaiable, the isbns of all the books that are copy of this one and can be sell.
+ */
 public class Book {
     private String isbn;
     protected String title;
