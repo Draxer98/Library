@@ -18,6 +18,12 @@ public class LibraryMember {
         this.phoneNumber = phoneNumber;
     }
 
+    public LibraryMember(String name, String surname, long phoneNumber) {
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getId() {
         return id;
     }
@@ -32,6 +38,22 @@ public class LibraryMember {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public long getPhoneNumber() {

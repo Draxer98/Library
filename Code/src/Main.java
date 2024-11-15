@@ -5,6 +5,8 @@ import events.Sell;
 import excepetions.DuplicatePhoneNumberException;
 import excepetions.IllegalLengthForNumberException;
 import handler.RegistrationHandler;
+import libraryMembers.Admin;
+import libraryMembers.LibraryMember;
 import libraryMembers.User;
 import util.Initialize;
 import util.Library;
@@ -203,62 +205,57 @@ public class Main {
             while (exit) {
                 switch (Util.menu(adminMainMenu, scanner)) {
 
+                    /* Registrazione utenti */
                     case 1 -> {
-                        // nome
-                        System.out.println("Inserisci il nome: ");
-                        String name = scanner.nextLine();
+                        // Get the name, surname and phone number
+                        LibraryMember libraryMember = registrationHandler.takeBaseInfoOfUser(scanner)
 
-                        // cognome
-                        System.out.println("Inserisci il congome: ");
-                        String surname = scanner.nextLine();
-
-                        long phoneNumber;
-
-                        // phone Number
-                        while (true) {
-                            try {
-                                System.out.println("Inserisci il numero di telefono: ");
-                                phoneNumber = Long.parseLong(scanner.nextLine());
-
-                                // verify
-                                registrationHandler.verifyPhoneNumber(phoneNumber);
-
-                                break;
-                            } catch (IllegalLengthForNumberException | DuplicatePhoneNumberException e) {
-                                System.out.println(e.getMessage());
-                            } catch (Exception e) {
-                                System.out.println("Il valore deve essere solo numerico");
-                            }
-                        }
-
+                        // Generate id and password
                         String id = "U" + initialize.getIdNumber();
-
                         String password = registrationHandler.generateRandomPassword();
 
-                        User newUser = new User(id, password, name, surname, phoneNumber);
+                        // The user into the list of users
+                        initialize.addUser(new User(id, password, libraryMember.getName(), libraryMember.getSurname(), libraryMember.getPhoneNumber()));
 
-                        initialize.addUser(newUser);
+                        System.out.println("Utente creato con ID = " + id + ", PASSWORD = " + password);
                     }
+                    /* Registrazione admin */
                     case 2 -> {
+                        // Get the name, surname and phone number
+                        LibraryMember libraryMember = registrationHandler.takeBaseInfoOfUser(scanner);
 
+                        // Generate id and password
+                        String id = "A" + initialize.getIdNumber();
+                        String password = registrationHandler.generateRandomPassword();
+
+                        // The admin into the list of admins
+                        initialize.addAdmin(new Admin(id, password, libraryMember.getName(), libraryMember.getSurname(), libraryMember.getPhoneNumber()));
+
+                        System.out.println("Utente creato con ID = " + id + ", PASSWORD = " + password);
                     }
+                    /* Visualizza tutti utenti */
                     case 3 -> {
                         initialize.getUsers().forEach(System.out::println);
 
                         initialize.getAdmins().forEach(System.out::println);
                     }
+                    /* Cerca ID */
                     case 4 -> {
 
                     }
+                    /* Visualizzazione dei prestiti */
                     case 5 -> {
 
                     }
+                    /* Inserimento libro */
                     case 6 -> {
 
                     }
+                    /* Cancella libro */
                     case 7 -> {
 
                     }
+                    /* Esistenza libro */
                     case 8 -> {
 
                     }

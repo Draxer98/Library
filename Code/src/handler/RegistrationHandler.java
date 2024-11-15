@@ -3,10 +3,12 @@ package handler;
 import excepetions.DuplicatePhoneNumberException;
 import excepetions.IllegalLengthForNumberException;
 import libraryMembers.Admin;
+import libraryMembers.LibraryMember;
 import libraryMembers.User;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * This class takes care of the registration of a new user.
@@ -72,5 +74,50 @@ public class RegistrationHandler {
         }
 
         return password.toString();
+    }
+
+    /**
+     * This method ask the user the insert the name, surname and phone number.
+     * If all the data are correct then return a new {@link LibraryMember}.
+     *
+     * @param scanner Scanner to read the data.
+     * @return a new {@link LibraryMember} if all the data are correct.
+     */
+    public LibraryMember takeBaseInfoOfUser(Scanner scanner) {
+
+        String name, surname;
+
+        // name
+        do {
+            System.out.println("Inserisci il nome: ");
+            name = scanner.nextLine();
+        } while (name.isEmpty());
+
+        // surname
+        do {
+            System.out.println("Inserisci il congome: ");
+            surname = scanner.nextLine();
+        } while (surname.isEmpty());
+
+        long phoneNumber;
+
+        // phone Number
+        while (true) {
+            try {
+                System.out.println("Inserisci il numero di telefono: ");
+                phoneNumber = Long.parseLong(scanner.nextLine());
+
+                // verify
+                verifyPhoneNumber(phoneNumber);
+
+                break;
+            } catch (IllegalLengthForNumberException | DuplicatePhoneNumberException e) {
+                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Il valore deve essere solo numerico");
+            }
+        }
+
+        return new LibraryMember(name, surname, phoneNumber);
     }
 }
