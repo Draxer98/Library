@@ -2,8 +2,6 @@ import books.Book;
 import books.BookCopy;
 import events.Loan;
 import events.Sell;
-import excepetions.DuplicatePhoneNumberException;
-import excepetions.IllegalLengthForNumberException;
 import handler.RegistrationHandler;
 import libraryMembers.Admin;
 import libraryMembers.LibraryMember;
@@ -208,7 +206,7 @@ public class Main {
                     /* Registrazione utenti */
                     case 1 -> {
                         // Get the name, surname and phone number
-                        LibraryMember libraryMember = registrationHandler.takeBaseInfoOfUser(scanner)
+                        LibraryMember libraryMember = registrationHandler.takeBaseInfoOfUser(scanner);
 
                         // Generate id and password
                         String id = "U" + initialize.getIdNumber();
@@ -231,7 +229,7 @@ public class Main {
                         // The admin into the list of admins
                         initialize.addAdmin(new Admin(id, password, libraryMember.getName(), libraryMember.getSurname(), libraryMember.getPhoneNumber()));
 
-                        System.out.println("Utente creato con ID = " + id + ", PASSWORD = " + password);
+                        System.out.println("Admin creato con ID = " + id + ", PASSWORD = " + password);
                     }
                     /* Visualizza tutti utenti */
                     case 3 -> {
@@ -242,6 +240,14 @@ public class Main {
                     /* Cerca ID */
                     case 4 -> {
 
+                        LibraryMember libraryMember;
+                        String id = scanner.nextLine();
+
+                        if ((libraryMember = initialize.getLibraryMemberFormId(id)) != null) {
+                            System.out.println("Utente trovato.\n" + libraryMember.toString());
+                        } else {
+                            System.out.println("Utente non trovato");
+                        }
                     }
                     /* Visualizzazione dei prestiti */
                     case 5 -> {

@@ -7,6 +7,7 @@ import category.Category;
 import data.JsonReader;
 import events.Loan;
 import events.Sell;
+import libraryMembers.LibraryMember;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -43,6 +44,30 @@ public class Initialize {
         bookForSell = bookForLoan != null ? loadBooksForSell(bookForLoan) : new ArrayList<>();
 
         this.idNumber = loadIsNumber(pathIdNumber);
+    }
+
+    /**
+     * Searches for a library member by their ID. The method checks first among users, then among admins.
+     * If a matching member is found, it is returned; otherwise, null is returned.
+     *
+     * @param id the ID of the library member to search for.
+     * @return the {@link LibraryMember} with the specified ID, or null if no match is found.
+     */
+    public LibraryMember getLibraryMemberFormId(String id) {
+
+        for (User user : users) {
+            if (user.getId().equals(id)) {
+                return user;
+            }
+        }
+
+        for (Admin admin : admins) {
+            if (admin.getId().equals(id)) {
+                return admin;
+            }
+        }
+
+        return null;
     }
 
     private int loadIsNumber(String pathIdNumber) {
@@ -277,6 +302,7 @@ public class Initialize {
 
     public void addUser(User user) {
         users.add(user);
+        idNumber++;
         modifyed = true;
     }
 
@@ -286,6 +312,7 @@ public class Initialize {
 
     public void addAdmin(Admin admin) {
         admins.add(admin);
+        idNumber++;
         modifyed = true;
     }
 

@@ -65,6 +65,15 @@ public class LibraryMember {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof LibraryMember libraryMember) {
+            return this.id.equals(libraryMember.getId());
+        }
+
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "Membro libreria: {" + "\n" +
                 "\tId = '" + id + "\n" +

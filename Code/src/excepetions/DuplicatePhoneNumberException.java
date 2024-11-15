@@ -6,6 +6,6 @@ package excepetions;
  */
 public class DuplicatePhoneNumberException extends RuntimeException {
     public DuplicatePhoneNumberException() {
-        super("Il numbero di telfono deve essere univoco");
+        super("Il numbero di telefono deve essere univoco");
     }
 }
