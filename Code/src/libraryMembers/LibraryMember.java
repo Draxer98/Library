@@ -1,5 +1,8 @@
 package libraryMembers;
 
+/**
+ * Represents the Library member. It is the parent class of {@link Admin} and {@link User}.
+ */
 public class LibraryMember {
     protected String id;
     protected String password;

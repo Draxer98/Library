@@ -2,6 +2,11 @@ package events;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a loan of the library,
+ * and it tracks isbn of the loaned book, the date when the book was loaned
+ * and the date when the user who loaned the book have to return it.
+ */
 public class Loan {
     private String isbn;
     private LocalDate loanDate;

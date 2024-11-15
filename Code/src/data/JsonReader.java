@@ -8,6 +8,9 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * This class read json arrays and json object from a file.
+ */
 public class JsonReader {
 
     /**

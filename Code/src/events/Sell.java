@@ -2,6 +2,11 @@ package events;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a sell of the library,
+ * and it tracks isbn of the sold book, the date when the book was sold
+ * and the price at the moment of the sell.
+ */
 public class Sell {
     private String isbnSoldBook;
     private double price;

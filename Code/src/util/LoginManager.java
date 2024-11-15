@@ -6,6 +6,9 @@ import libraryMembers.User;
 
 import java.util.ArrayList;
 
+/**
+ * This class takes care of authenticate the user.
+ */
 public class LoginManager {
     private ArrayList<User> users;
     private ArrayList<Admin> admins;
@@ -17,6 +20,15 @@ public class LoginManager {
         this.loggedInUser = null;
     }
 
+    /**
+     * This method research if there is a user or an admin with the given id and password.
+     * If there aren't the method return false.
+     *
+     * @param id id to research.
+     * @param password password to research.
+     *
+     * @return true if it finds a user or an admin with the given id and password.
+     */
     public boolean login(String id, String password) {
 
         for (User user : users) {

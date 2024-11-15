@@ -7,6 +7,10 @@ import events.Sell;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the library. So it has the book that can be sold and the books that can be loaned. <br>
+ * It also has all the loans and sells.
+ */
 public class Library {
     private double yield;
     private ArrayList<Sell> sells;
@@ -19,6 +23,12 @@ public class Library {
         this.booksForSell = booksForSell;
     }
 
+    /**
+     * This method research the parent isbn in the list of the books for loans.
+     *
+     * @param parentIsbn the parentIsbn to research.
+     * @return the book if it finds the parentBook else return null
+     */
     public Book findParentBookByIsbn(String parentIsbn) {
         for (Book book : booksForLoan) {
             if (book.getIsbn().equals(parentIsbn)) {

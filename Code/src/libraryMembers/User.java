@@ -6,6 +6,10 @@ import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the user account in the library.
+ * Is the child class of {@link LibraryMember}.
+ */
 public class User extends LibraryMember {
     private ArrayList<Loan> loans;
     private ArrayList<Sell> sells;

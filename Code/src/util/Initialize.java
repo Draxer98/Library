@@ -19,6 +19,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * This class takes care of get the information in all the files that have information.
+ */
 public class Initialize {
     private ArrayList<User> users;
     private ArrayList<Admin> admins;
@@ -250,6 +253,12 @@ public class Initialize {
         return books;
     }
 
+    /**
+     * Loads the books for sale based on the information of the books for loan.
+     *
+     * @param b ArrayList of books for loan
+     * @return ArrayList of books copy
+     */
     private static ArrayList<BookCopy> loadBooksForSell(ArrayList<Book> b) {
         ArrayList<BookCopy> books = new ArrayList<>();
 

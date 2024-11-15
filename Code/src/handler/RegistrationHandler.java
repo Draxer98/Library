@@ -8,6 +8,9 @@ import libraryMembers.User;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * This class takes care of the registration of a new user.
+ */
 public class RegistrationHandler {
     private ArrayList<User> users;
     private ArrayList<Admin> admins;
@@ -27,6 +30,13 @@ public class RegistrationHandler {
         this.admins = admins;
     }
 
+    /**
+     * This method check if the number is unique within all the user and admins.
+     *
+     * @param phoneNumber
+     * @throws DuplicatePhoneNumberException If the phoneNumber is a phone number of another admin or user.
+     * @throws IllegalLengthForNumberException If the phoneNumber has a length different from 10.
+     */
     public void verifyPhoneNumber(long phoneNumber) throws DuplicatePhoneNumberException {
 
         if (String.valueOf(phoneNumber).length() != 10) {
@@ -46,6 +56,11 @@ public class RegistrationHandler {
         }
     }
 
+    /**
+     * This method generate a random password.
+     *
+     * @return a random password
+     */
     public String generateRandomPassword() {
         final Random random = new Random();
         StringBuilder password = new StringBuilder(passwordLength);
