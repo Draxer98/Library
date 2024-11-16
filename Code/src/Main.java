@@ -251,7 +251,12 @@ public class Main {
                     }
                     /* Visualizzazione dei prestiti */
                     case 5 -> {
-
+                        initialize.getUsers().forEach(user -> {
+                            System.out.println("Questi sono i prestiti di " + user.getName() + " " + user.getSurname() + " (" + user.getId() + ")".);
+                            user.getLoans().forEach(loan -> {
+                                System.out.println("\t" + loan.toString());
+                            });
+                        });
                     }
                     /* Inserimento libro */
                     case 6 -> {
