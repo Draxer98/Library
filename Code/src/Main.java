@@ -260,7 +260,7 @@ public class Main {
                     }
                     /* Inserimento libro */
                     case 6 -> {
-
+                        
                     }
                     /* Cancella libro */
                     case 7 -> {
