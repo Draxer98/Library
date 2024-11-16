@@ -2,6 +2,7 @@ import books.Book;
 import books.BookCopy;
 import events.Loan;
 import events.Sell;
+import handler.InsertNewBookHandler;
 import handler.RegistrationHandler;
 import libraryMembers.Admin;
 import libraryMembers.LibraryMember;
@@ -28,6 +29,8 @@ public class Main {
         LoginManager loginManager = new LoginManager(initialize.getUsers(), initialize.getAdmins());
         Library library = new Library(initialize.getBookForLoan(), initialize.getBookForSell());
         RegistrationHandler registrationHandler = new RegistrationHandler(initialize.getUsers(), initialize.getAdmins());
+        InsertNewBookHandler insertNewBookHandler = new InsertNewBookHandler(initialize.getBookForLoan());
+
 
         String[] loginMenu = {
                 "BENVENUTO",
@@ -53,6 +56,7 @@ public class Main {
                 "Cerca ID",
                 "Visualizzazione dei prestiti",
                 "Inserimento libro",
+                "Inserisci copie di un libro",
                 "Cancella libro",
                 "Esistenza libro",
                 "Esci"
@@ -252,7 +256,7 @@ public class Main {
                     /* Visualizzazione dei prestiti */
                     case 5 -> {
                         initialize.getUsers().forEach(user -> {
-                            System.out.println("Questi sono i prestiti di " + user.getName() + " " + user.getSurname() + " (" + user.getId() + ")".);
+                            System.out.println("Questi sono i prestiti di " + user.getName() + " " + user.getSurname() + " (" + user.getId() + ")");
                             user.getLoans().forEach(loan -> {
                                 System.out.println("\t" + loan.toString());
                             });
@@ -260,14 +264,19 @@ public class Main {
                     }
                     /* Inserimento libro */
                     case 6 -> {
-                        
+                        Book newBook = insertNewBookHandler.takeBaseInfoOfBookForLoan(scanner);
+
+
                     }
-                    /* Cancella libro */
+                    /* Inserisci copie di un libro */
                     case 7 -> {
 
                     }
-                    /* Esistenza libro */
+                    /* Cancella libro */
                     case 8 -> {
+
+                    }/* Esistenza libro */
+                    case 9 -> {
 
                     }
                     default -> {
