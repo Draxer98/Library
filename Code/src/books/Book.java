@@ -18,14 +18,14 @@ public class Book {
     protected ArrayList<String> isbnCopyBook;
     protected boolean isAvaiable;
 
-    public Book(String isbn, String title, ArrayList<Author> authors, double price, Category category) {
+    public Book(String isbn, String title, ArrayList<Author> authors, double price, Category category, ArrayList<String> isbnCopyBook) {
         this.isbn = isbn;
         this.title = title;
         this.authors = authors;
         this.price = price;
         this.category = category;
         this.isAvaiable = true;
-        this.isbnCopyBook = new ArrayList<>();
+        this.isbnCopyBook = isbnCopyBook;
     }
 
     public String getIsbn() {
@@ -89,7 +89,7 @@ public class Book {
         return "Libro {" +
                 "isbn= '" + isbn + "'" +
                 ", Titolo = '" + title + "'" +
-                ", Autore = '" + authors + "'" +
+                ", Autori = '" + authors + "'" +
                 ", Prezzo = '" + price + "'" +
                 ", Categoria = '" + category + "'" +
                 '}';

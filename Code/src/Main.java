@@ -24,7 +24,7 @@ public class Main {
                 "src/data/files/Users.json",
                 "src/data/files/Admin.json",
                 "src/data/files/BooksForLoan.json",
-                "src/data/files/idNumber.json"
+                "src/data/files/GeneralData.json"
         );
         LoginManager loginManager = new LoginManager(initialize.getUsers(), initialize.getAdmins());
         Library library = new Library(initialize.getBookForLoan(), initialize.getBookForSell());
@@ -266,7 +266,7 @@ public class Main {
                     case 6 -> {
                         Book newBook = insertNewBookHandler.takeBaseInfoOfBookForLoan(scanner);
 
-
+                        library.addBookForLoan(newBook);
                     }
                     /* Inserisci copie di un libro */
                     case 7 -> {

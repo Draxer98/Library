@@ -1,23 +1,16 @@
 package books;
 
-import java.util.ArrayList;
-
 /**
  * The author class represents an author of books.
- * An author has an identifier, a first name, a last name, and a list of books they have written.
+ * An author has an identifier, first name and last name.
  */
 public class Author {
-    private String id;
     private String name;
     private String surname;
-    private ArrayList<Book> books;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public Author(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
     }
 
     public String getName() {
@@ -36,19 +29,11 @@ public class Author {
         this.surname = surname;
     }
 
-    public ArrayList<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(ArrayList<Book> books) {
-        this.books = books;
-    }
-
     @Override
     public String toString() {
         return "Autore {" +
-                "nome ='" + name + "'" +
-                ", cognome ='" + surname + "'" +
+                "nome = '" + name + "'" +
+                ", cognome = '" + surname + "'" +
                 '}';
     }
 }

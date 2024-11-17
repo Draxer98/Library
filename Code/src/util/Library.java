@@ -10,6 +10,7 @@ import java.util.ArrayList;
 /**
  * Represents the library. So it has the book that can be sold and the books that can be loaned. <br>
  * It also has all the loans and sells.
+ * Modify field indicates whether {@code booksForLoan} or {@code booksForSell} has been changed.
  */
 public class Library {
     private double yield;
@@ -17,6 +18,7 @@ public class Library {
     private ArrayList<Loan> loans;
     private ArrayList<Book> booksForLoan;
     private ArrayList<BookCopy> booksForSell;
+    private boolean modify = false;
 
     public Library(ArrayList<Book> booksForLoan, ArrayList<BookCopy> booksForSell) {
         this.booksForLoan = booksForLoan;
@@ -41,10 +43,19 @@ public class Library {
 
     public void addBookForLoan(Book b) {
         this.booksForLoan.add(b);
+
+        if (!b.getIsbnCopyBook().isEmpty()) {
+            for (String isbn : b.getIsbnCopyBook()) {
+                addBookForSell(new BookCopy(isbn, b.getIsbn()));
+            }
+        }
+
+        modify = true;
     }
 
     public void addBookForSell(BookCopy b) {
         this.booksForSell.add(b);
+        modify = true;
     }
 
     public ArrayList<Book> getBooksForLoan() {

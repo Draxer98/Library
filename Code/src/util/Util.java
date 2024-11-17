@@ -142,7 +142,11 @@ public class Util {
                 System.out.println("[" + i + "]" + " " + options[i]);
             }
 
-            scelta = (Integer.parseInt(scanner.nextLine()));
+            try {
+                scelta = Integer.parseInt(scanner.nextLine());
+            } catch (Exception e) {
+                scelta = -1;
+            }
 
             if ((scelta < 1) || (scelta > options.length - 1)) {
                 System.out.println("Opzione Sbagliata");
@@ -183,7 +187,7 @@ public class Util {
             }
 
             try {
-                scelta = (Integer.parseInt(scanner.nextLine()));
+                scelta = Integer.parseInt(scanner.nextLine());
             } catch (Exception e) {
                 scelta = -1;
             }

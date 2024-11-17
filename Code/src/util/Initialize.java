@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 /**
  * This class takes care of get the information in all the files that have information.
+ * Modified field indicates whether {@code users} or {@code admins} has been changed.
  */
 public class Initialize {
     private ArrayList<User> users;
@@ -29,7 +30,8 @@ public class Initialize {
     private ArrayList<Book> bookForLoan;
     private ArrayList<BookCopy> bookForSell;
     private int idNumber;
-    private boolean modifyed = false;
+    private static int isbnLength;
+    private boolean modify = false;
 
     public Initialize(String userPath, String adminPath, String loanPath, String pathIdNumber) {
         users = new ArrayList<>();
@@ -43,7 +45,7 @@ public class Initialize {
 
         bookForSell = bookForLoan != null ? loadBooksForSell(bookForLoan) : new ArrayList<>();
 
-        this.idNumber = loadIsNumber(pathIdNumber);
+        loadGeneralData(pathIdNumber);
     }
 
     /**
@@ -70,20 +72,18 @@ public class Initialize {
         return null;
     }
 
-    private int loadIsNumber(String pathIdNumber) {
-        int num;
-
-        JSONObject file;
+    private void loadGeneralData(String pathIdNumber) {
+        JSONObject file = new JSONObject();
 
         try {
             file = JsonReader.readObj(pathIdNumber);
         } catch (Exception e) {
-            return -1;
+            idNumber = 0;
+            isbnLength = 0;
         }
 
-        num = ((Number) file.get("num")).intValue();
-
-        return num;
+        idNumber = ((Number) file.get("idNumber")).intValue();
+        isbnLength = ((Number) file.get("isbnLength")).intValue();
     }
 
     private static ArrayList<Admin> loadAdminsFromFile(String path) {
@@ -244,10 +244,11 @@ public class Initialize {
             ArrayList<Author> authors = new ArrayList<>();
             for (Object authorObj : authorsArray) {
                 JSONObject authorJson = (JSONObject) authorObj;
-                Author author = new Author();
-                author.setName((String) authorJson.get("name"));
-                author.setSurname((String) authorJson.get("surname"));
-                authors.add(author);
+
+                authors.add(new Author(
+                        (String) authorJson.get("name"),
+                        (String) authorJson.get("surname")
+                ));
             }
 
             // Estrae il prezzo del libro come double
@@ -257,7 +258,7 @@ public class Initialize {
             Category category = Category.valueOf((String) bookJson.get("category"));
 
             // Crea un nuovo oggetto books.Book con i dati estratti
-            Book book = new Book(isbn, title, authors, price, category);
+            Book book = new Book(isbn, title, authors, price, category, new ArrayList<>());
 
             // Estrazione dei numeri ISBN per le copie del libro (JSONArray di stringhe)
             JSONArray isbnCopyArray = (JSONArray) bookJson.get("isbnCopyBook");
@@ -303,7 +304,7 @@ public class Initialize {
     public void addUser(User user) {
         users.add(user);
         idNumber++;
-        modifyed = true;
+        modify = true;
     }
 
     public ArrayList<Admin> getAdmins() {
@@ -313,7 +314,7 @@ public class Initialize {
     public void addAdmin(Admin admin) {
         admins.add(admin);
         idNumber++;
-        modifyed = true;
+        modify = true;
     }
 
     public ArrayList<Book> getBookForLoan() {
@@ -326,5 +327,9 @@ public class Initialize {
 
     public int getIdNumber() {
         return idNumber;
+    }
+
+    public static int getIsbnLength() {
+        return isbnLength;
     }
 }
