@@ -41,7 +41,7 @@ public class BookCopy {
     }
 
     public String toString(Library library) {
-        Book parentBook = library.findParentBookByIsbn(parentIsbn);
+        Book parentBook = library.searchByIsbn(parentIsbn);
 
         return "Libro copia {" +
                 "isbn='" + isbn + '\'' +

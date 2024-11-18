@@ -1,7 +1,7 @@
 package handler;
 
-import excepetions.DuplicatePhoneNumberException;
-import excepetions.IllegalLengthForNumberException;
+import excepetions.phoneNumber.DuplicatePhoneNumberException;
+import excepetions.phoneNumber.IllegalLengthForNumberException;
 import libraryMembers.Admin;
 import libraryMembers.LibraryMember;
 import libraryMembers.User;

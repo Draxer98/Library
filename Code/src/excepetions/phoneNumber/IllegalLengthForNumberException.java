@@ -1,4 +1,4 @@
-package excepetions;
+package excepetions.phoneNumber;
 
 /**
  * Exception thrown when attempting to add a phone

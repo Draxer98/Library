@@ -27,8 +27,8 @@ import java.util.ArrayList;
 public class Initialize {
     private ArrayList<User> users;
     private ArrayList<Admin> admins;
-    private ArrayList<Book> bookForLoan;
-    private ArrayList<BookCopy> bookForSell;
+    private ArrayList<Book> booksForLoan;
+    private ArrayList<BookCopy> booksForSell;
     private int idNumber;
     private static int isbnLength;
     private boolean modify = false;
@@ -40,10 +40,10 @@ public class Initialize {
         admins = new ArrayList<>();
         admins = loadAdminsFromFile(adminPath);
 
-        bookForLoan = new ArrayList<>();
-        bookForLoan = loadBooksForLoan(loanPath);
+        booksForLoan = new ArrayList<>();
+        booksForLoan = loadBooksForLoan(loanPath);
 
-        bookForSell = bookForLoan != null ? loadBooksForSell(bookForLoan) : new ArrayList<>();
+        booksForSell = booksForLoan != null ? loadBooksForSell(booksForLoan) : new ArrayList<>();
 
         loadGeneralData(pathIdNumber);
     }
@@ -317,12 +317,12 @@ public class Initialize {
         modify = true;
     }
 
-    public ArrayList<Book> getBookForLoan() {
-        return bookForLoan;
+    public ArrayList<Book> getBooksForLoan() {
+        return booksForLoan;
     }
 
-    public ArrayList<BookCopy> getBookForSell() {
-        return bookForSell;
+    public ArrayList<BookCopy> getBooksForSell() {
+        return booksForSell;
     }
 
     public int getIdNumber() {

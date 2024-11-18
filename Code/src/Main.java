@@ -3,6 +3,7 @@ import books.BookCopy;
 import events.Loan;
 import events.Sell;
 import handler.InsertNewBookHandler;
+import handler.InsertNewCopyBookHandler;
 import handler.RegistrationHandler;
 import libraryMembers.Admin;
 import libraryMembers.LibraryMember;
@@ -27,9 +28,10 @@ public class Main {
                 "src/data/files/GeneralData.json"
         );
         LoginManager loginManager = new LoginManager(initialize.getUsers(), initialize.getAdmins());
-        Library library = new Library(initialize.getBookForLoan(), initialize.getBookForSell());
+        Library library = new Library(initialize.getBooksForLoan(), initialize.getBooksForSell());
         RegistrationHandler registrationHandler = new RegistrationHandler(initialize.getUsers(), initialize.getAdmins());
-        InsertNewBookHandler insertNewBookHandler = new InsertNewBookHandler(initialize.getBookForLoan());
+        InsertNewBookHandler insertNewBookHandler = new InsertNewBookHandler(library.getBooksForLoan());
+        InsertNewCopyBookHandler insertNewCopyBookHandler = new InsertNewCopyBookHandler(library.getBooksForLoan());
 
 
         String[] loginMenu = {
@@ -53,6 +55,7 @@ public class Main {
                 "Registrazione utenti",
                 "Registrazione admin",
                 "Visualizza tutti utenti",
+//                "Visualizza tutti i libri",
                 "Cerca ID",
                 "Visualizzazione dei prestiti",
                 "Inserimento libro",
@@ -119,7 +122,7 @@ public class Main {
 
                         // Transform the ArrayList<BookCopy> in a ArrayList<String>
                         // to be printable in Util.menu
-                        ArrayList<String> bookString = Util.bookForSellToMenu(library.getBooksForSell(true), library);
+                        ArrayList<String> bookString = library.bookForSellToMenu();
 
                         // if the size of the final array is
                         // it means that there is only the title
@@ -136,7 +139,7 @@ public class Main {
                         // Create new sell obj
                         Sell newSell = new Sell(
                                 chosenBook.getIsbn(),
-                                library.findParentBookByIsbn(chosenBook.getParentIsbn()).getPrice(),
+                                library.searchByIsbn(chosenBook.getParentIsbn()).getPrice(),
                                 LocalDate.now()
                         );
 
@@ -153,7 +156,7 @@ public class Main {
                             break;
                         }
 
-                        ArrayList<String> bookString = Util.bookForLoanToMenu(library.getBooksForLoan());
+                        ArrayList<String> bookString = library.bookForLoanToMenu();
 
                         // if the size of the final array is
                         // it means that there is only the title
@@ -264,18 +267,39 @@ public class Main {
                     }
                     /* Inserimento libro */
                     case 6 -> {
+                        insertNewBookHandler = new InsertNewBookHandler(library.getBooksForLoan());
+
                         Book newBook = insertNewBookHandler.takeBaseInfoOfBookForLoan(scanner);
 
                         library.addBookForLoan(newBook);
                     }
                     /* Inserisci copie di un libro */
                     case 7 -> {
+                        // Print book for loan list
+                        System.out.println("-------------");
+                        System.out.println("    LIBRI    ");
+                        System.out.println("-------------");
 
+                        library.getBooksForLoan().forEach(System.out::println);
+
+                        System.out.println("-------------");
+
+                        // Assign to a new class to refresh bookForLoan
+                        insertNewCopyBookHandler = new InsertNewCopyBookHandler(library.getBooksForLoan());
+
+                        // select book where to add copies
+                        Book book = library.searchByIsbn(insertNewCopyBookHandler.selectBookToModify(scanner));
+
+                        // add copies to the book
+                        book.addIsbnBookCopy(insertNewCopyBookHandler.takeIsbnToInsert(scanner));
+
+                        library.syncBooksForSell();
                     }
                     /* Cancella libro */
                     case 8 -> {
 
-                    }/* Esistenza libro */
+                    }
+                    /* Esistenza libro */
                     case 9 -> {
 
                     }

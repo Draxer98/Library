@@ -72,6 +72,14 @@ public class Book {
         return isbnCopyBook;
     }
 
+    public void addIsbnBookCopy(String isbn) {
+        isbnCopyBook.add(isbn);
+    }
+
+    public void addIsbnBookCopy(ArrayList<String> isbn) {
+        isbnCopyBook.addAll(isbn);
+    }
+
     public void setIsbnCopyBook(ArrayList<String> isbnCopyBook) {
         this.isbnCopyBook = isbnCopyBook;
     }
@@ -82,6 +90,15 @@ public class Book {
 
     public void setAvaiable(boolean avaiable) {
         isAvaiable = avaiable;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Book book) {
+            return this.isbn.equals(book.getIsbn());
+        }
+
+        return false;
     }
 
     @Override

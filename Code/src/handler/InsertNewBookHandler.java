@@ -4,7 +4,6 @@ import books.Author;
 import books.Book;
 import books.BookCopy;
 import category.Category;
-import excepetions.IllegalLengthForNumberException;
 import excepetions.isbn.DuplicateIsbnException;
 import excepetions.isbn.IllegalLengthForIsbnException;
 import util.Initialize;
@@ -184,7 +183,7 @@ public class InsertNewBookHandler {
      * @param isbn string to check
      * @return true if the isbn as parameter is unique, else false.
      */
-    private void verifyIsbn(String isbn) throws IllegalLengthForNumberException, DuplicateIsbnException {
+    private void verifyIsbn(String isbn) throws IllegalLengthForIsbnException, DuplicateIsbnException {
 
         if (isbn.length() != Initialize.getIsbnLength()) {
             throw new IllegalLengthForIsbnException();
