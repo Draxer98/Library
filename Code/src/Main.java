@@ -2,6 +2,7 @@ import books.Book;
 import books.BookCopy;
 import events.Loan;
 import events.Sell;
+import handler.DeleteBookHandler;
 import handler.InsertNewBookHandler;
 import handler.InsertNewCopyBookHandler;
 import handler.RegistrationHandler;
@@ -32,7 +33,7 @@ public class Main {
         RegistrationHandler registrationHandler = new RegistrationHandler(initialize.getUsers(), initialize.getAdmins());
         InsertNewBookHandler insertNewBookHandler = new InsertNewBookHandler(library.getBooksForLoan());
         InsertNewCopyBookHandler insertNewCopyBookHandler = new InsertNewCopyBookHandler(library.getBooksForLoan());
-
+        DeleteBookHandler deleteBookHandler = new DeleteBookHandler(library.getBooksForLoan());
 
         String[] loginMenu = {
                 "BENVENUTO",
@@ -275,6 +276,9 @@ public class Main {
                     }
                     /* Inserisci copie di un libro */
                     case 7 -> {
+                        // Assign to a new class to refresh bookForLoan
+                        insertNewCopyBookHandler = new InsertNewCopyBookHandler(library.getBooksForLoan());
+
                         // Print book for loan list
                         System.out.println("-------------");
                         System.out.println("    LIBRI    ");
@@ -283,9 +287,6 @@ public class Main {
                         library.getBooksForLoan().forEach(System.out::println);
 
                         System.out.println("-------------");
-
-                        // Assign to a new class to refresh bookForLoan
-                        insertNewCopyBookHandler = new InsertNewCopyBookHandler(library.getBooksForLoan());
 
                         // select book where to add copies
                         Book book = library.searchByIsbn(insertNewCopyBookHandler.selectBookToModify(scanner));
@@ -297,7 +298,28 @@ public class Main {
                     }
                     /* Cancella libro */
                     case 8 -> {
+                        // Check if there are book in library
+                        if (library.getBooksForLoan().isEmpty()) {
+                            System.out.println("Non ci sono libri nella biblioteca.");
+                        }
 
+                        // Assign to a new class to refresh bookForLoan
+                        deleteBookHandler = new DeleteBookHandler(library.getBooksForLoan());
+
+                        // Print book for loan list
+                        System.out.println("-------------");
+                        System.out.println("    LIBRI    ");
+                        System.out.println("-------------");
+
+                        library.getBooksForLoan().forEach(System.out::println);
+
+                        System.out.println("-------------");
+
+                        // select book to delete
+                        Book book = library.searchByIsbn(deleteBookHandler.selectBookToDelete(scanner));
+
+                        // Delete book from the list
+                        library.deleteBook(book);
                     }
                     /* Esistenza libro */
                     case 9 -> {

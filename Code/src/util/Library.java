@@ -182,4 +182,10 @@ public class Library {
 
         return booksForSell;
     }
+
+    public void deleteBook(Book book) {
+        booksForLoan.remove(book);
+
+        booksForSell.removeIf(bookCopy -> bookCopy.getParentIsbn().equals(book.getIsbn()));
+    }
 }
