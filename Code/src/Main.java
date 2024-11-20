@@ -327,7 +327,12 @@ public class Main {
                         Book book = library.searchByIsbn(deleteBookHandler.selectBookToDelete(scanner));
 
                         // Delete book from the list
-                        library.deleteBook(book);
+                        if (library.deleteBook(book)) {
+                            System.out.println("Libro eliminato.");
+                        } else {
+                            System.out.println("Libro non trovato.");
+                        }
+                        ;
                     }
                     /* Esistenza libro */
                     case 10 -> {
