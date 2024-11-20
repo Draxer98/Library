@@ -1,5 +1,7 @@
 package books;
 
+import org.json.simple.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -56,5 +58,14 @@ public class BookCopy {
                 ", Autori = " + parentBook.getAuthors() + "'" +
                 ", Categoria = " + parentBook.getCategory() + "'" +
                 '}';
+    }
+
+    public JSONObject toJson() {
+        JSONObject obj = new JSONObject();
+
+        obj.put("isbn", isbn);
+        obj.put("parentIsbn", parentIsbn);
+
+        return obj;
     }
 }

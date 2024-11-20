@@ -1,6 +1,7 @@
 package util;
 
 import books.Book;
+import books.BookCopy;
 import data.JsonWriter;
 import org.json.simple.JSONArray;
 
@@ -19,7 +20,17 @@ public class Close {
     }
 
     private void saveBookForSell(String sellPath) {
+        if (!library.isModify()) {
+            return;
+        }
 
+        JSONArray jsonSellFile = new JSONArray();
+
+        for (BookCopy bookCopy : library.getBooksForSell(false)) {
+            jsonSellFile.add(bookCopy.toJson());
+        }
+
+        JsonWriter.writeList(jsonSellFile, sellPath);
     }
 
     private void saveAdmin(String adminPath) {
