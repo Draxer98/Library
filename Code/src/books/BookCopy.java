@@ -1,6 +1,6 @@
 package books;
 
-import util.Library;
+import java.util.ArrayList;
 
 /**
  * This class represents the book that can be sold.
@@ -40,8 +40,14 @@ public class BookCopy {
         return false;
     }
 
-    public String toString(Library library) {
-        Book parentBook = library.searchByIsbn(parentIsbn);
+    public String toString(ArrayList<Book> books) {
+        Book parentBook = null;
+
+        for (Book book : books) {
+            if (book.getIsbn().equals(parentIsbn)) {
+                parentBook = book;
+            }
+        }
 
         return "Libro copia {" +
                 "isbn='" + isbn + '\'' +

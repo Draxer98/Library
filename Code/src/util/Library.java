@@ -55,7 +55,7 @@ public class Library {
 
         // Transform every book copy into a string
         booksForSell.forEach(bookCopy -> {
-            bookString.add(bookCopy.toString(this));
+            bookString.add(bookCopy.toString(this.booksForLoan));
         });
 
         return bookString;

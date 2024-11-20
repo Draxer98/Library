@@ -56,7 +56,7 @@ public class Main {
                 "Registrazione utenti",
                 "Registrazione admin",
                 "Visualizza tutti utenti",
-//                "Visualizza tutti i libri",
+                "Visualizza tutti i libri",
                 "Cerca ID",
                 "Visualizzazione dei prestiti",
                 "Inserimento libro",
@@ -153,7 +153,7 @@ public class Main {
                     /* Prendere in prestito un libro */
                     case 2 -> {
                         if (library.getBooksForLoan().isEmpty()) {
-                            System.out.println("Non ci sono libri. Disponibili per il perstito");
+                            System.out.println("Non ci sono libri disponibili per il perstito");
                             break;
                         }
 
@@ -245,8 +245,18 @@ public class Main {
 
                         initialize.getAdmins().forEach(System.out::println);
                     }
-                    /* Cerca ID */
+                    /* Visualizza tutti i libri */
                     case 4 -> {
+                        System.out.println("Libri per il prestito");
+
+                        library.getBooksForLoan().forEach(book -> System.out.println("\t" + book.toString()));
+
+                        System.out.println("Libri per la vendita'");
+
+                        library.getBooksForSell(false).forEach(book -> System.out.println("\t" + book.toString(library.getBooksForLoan())));
+                    }
+                    /* Cerca ID */
+                    case 5 -> {
 
                         LibraryMember libraryMember;
                         String id = scanner.nextLine();
@@ -258,7 +268,7 @@ public class Main {
                         }
                     }
                     /* Visualizzazione dei prestiti */
-                    case 5 -> {
+                    case 6 -> {
                         initialize.getUsers().forEach(user -> {
                             System.out.println("Questi sono i prestiti di " + user.getName() + " " + user.getSurname() + " (" + user.getId() + ")");
                             user.getLoans().forEach(loan -> {
@@ -267,7 +277,7 @@ public class Main {
                         });
                     }
                     /* Inserimento libro */
-                    case 6 -> {
+                    case 7 -> {
                         insertNewBookHandler = new InsertNewBookHandler(library.getBooksForLoan());
 
                         Book newBook = insertNewBookHandler.takeBaseInfoOfBookForLoan(scanner);
@@ -275,7 +285,7 @@ public class Main {
                         library.addBookForLoan(newBook);
                     }
                     /* Inserisci copie di un libro */
-                    case 7 -> {
+                    case 8 -> {
                         // Assign to a new class to refresh bookForLoan
                         insertNewCopyBookHandler = new InsertNewCopyBookHandler(library.getBooksForLoan());
 
@@ -297,7 +307,7 @@ public class Main {
                         library.syncBooksForSell();
                     }
                     /* Cancella libro */
-                    case 8 -> {
+                    case 9 -> {
                         // Check if there are book in library
                         if (library.getBooksForLoan().isEmpty()) {
                             System.out.println("Non ci sono libri nella biblioteca.");
@@ -322,7 +332,7 @@ public class Main {
                         library.deleteBook(book);
                     }
                     /* Esistenza libro */
-                    case 9 -> {
+                    case 10 -> {
 
                     }
                     default -> {
