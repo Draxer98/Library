@@ -107,7 +107,7 @@ public class User extends LibraryMember {
             loansJson.add(loan.toJson());
         }
 
-        obj.put("", loansJson);
+        obj.put("loans", loansJson);
 
         JSONArray sellsJson = new JSONArray();
 

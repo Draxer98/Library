@@ -18,7 +18,6 @@ public class Library {
     private ArrayList<Loan> loans;
     private ArrayList<Book> booksForLoan;
     private ArrayList<BookCopy> booksForSell;
-    private boolean modify = false;
 
     public Library(ArrayList<Book> booksForLoan, ArrayList<BookCopy> booksForSell) {
         this.booksForLoan = booksForLoan;
@@ -96,9 +95,6 @@ public class Library {
                 }
             }
         }
-
-        // Indicate that the library's sellable books have been modified
-        modify = true;
     }
 
 
@@ -136,8 +132,6 @@ public class Library {
         for (String isbn : b.getIsbnCopyBook()) {
             addBookForSell(new BookCopy(isbn, b.getIsbn()));
         }
-
-        modify = true;
     }
 
     /**
@@ -155,7 +149,6 @@ public class Library {
         }
 
         this.booksForSell.add(b);
-        modify = true;
     }
 
     public ArrayList<Book> getBooksForLoan() {
@@ -187,9 +180,5 @@ public class Library {
         booksForSell.removeIf(bookCopy -> bookCopy.getParentIsbn().equals(book.getIsbn()));
 
         return booksForLoan.remove(book);
-    }
-
-    public boolean isModify() {
-        return modify;
     }
 }

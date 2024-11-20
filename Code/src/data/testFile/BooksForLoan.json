@@ -1,0 +1,34 @@
+[
+  {
+    "isbn": "9781234567890",
+    "title": "Example Book One",
+    "authors": [
+      {
+        "name": "John",
+        "surname": "Doe"
+      },
+      {
+        "name": "Jane",
+        "surname": "Smith"
+      }
+    ],
+    "price": 24.99,
+    "category": "CAT1",
+    "isbnCopyBook": ["9781234567891", "9781234567892", "9781234567893"],
+    "isAvailable": true
+  },
+  {
+    "isbn": "9780987654320",
+    "title": "Example Book Two",
+    "authors": [
+      {
+        "name": "Alice",
+        "surname": "Johnson"
+      }
+    ],
+    "price": 19.99,
+    "category": "CAT2",
+    "isbnCopyBook": ["9780987654321", "9780987654322"],
+    "isAvailable": true
+  }
+]

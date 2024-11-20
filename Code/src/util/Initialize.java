@@ -31,9 +31,8 @@ public class Initialize {
     private ArrayList<BookCopy> booksForSell;
     private int idNumber;
     private static int isbnLength;
-    private boolean modify = false;
 
-    public Initialize(String userPath, String adminPath, String loanPath, String pathIdNumber) {
+    public Initialize(String userPath, String adminPath, String loanPath, String generalDataPath) {
         users = new ArrayList<>();
         users = loadUsersFromFile(userPath);
 
@@ -45,7 +44,7 @@ public class Initialize {
 
         booksForSell = booksForLoan != null ? loadBooksForSell(booksForLoan) : new ArrayList<>();
 
-        loadGeneralData(pathIdNumber);
+        loadGeneralData(generalDataPath);
     }
 
     /**
@@ -72,11 +71,11 @@ public class Initialize {
         return null;
     }
 
-    private void loadGeneralData(String pathIdNumber) {
+    private void loadGeneralData(String path) {
         JSONObject file = new JSONObject();
 
         try {
-            file = JsonReader.readObj(pathIdNumber);
+            file = JsonReader.readObj(path);
         } catch (Exception e) {
             idNumber = 0;
             isbnLength = 0;
@@ -174,8 +173,8 @@ public class Initialize {
 
                 loans.add(new Loan(
                         (String) jsonLoan.get("isbn"),
-                        LocalDate.parse((String) jsonLoan.get("loanDate"), DateTimeFormatter.ofPattern("dd-MM-yyyy")),
-                        LocalDate.parse((String) jsonLoan.get("expirationDate"), DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                        LocalDate.parse((String) jsonLoan.get("loanDate"), DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                        LocalDate.parse((String) jsonLoan.get("expirationDate"), DateTimeFormatter.ofPattern("yyyy-MM-dd"))
                 ));
             }
 
@@ -189,7 +188,7 @@ public class Initialize {
                 sells.add(new Sell(
                         (String) jsonSell.get("isbnSoldBook"),
                         ((Number) jsonSell.get("price")).doubleValue(),
-                        LocalDate.parse((String) jsonSell.get("sellDate"), DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                        LocalDate.parse((String) jsonSell.get("sellDate"), DateTimeFormatter.ofPattern("yyyy-MM-dd"))
                 ));
             }
 
@@ -303,8 +302,7 @@ public class Initialize {
 
     public void addUser(User user) {
         users.add(user);
-        idNumber++;
-        modify = true;
+        incrementIdNumber();
     }
 
     public ArrayList<Admin> getAdmins() {
@@ -313,8 +311,11 @@ public class Initialize {
 
     public void addAdmin(Admin admin) {
         admins.add(admin);
+        incrementIdNumber();
+    }
+
+    public void incrementIdNumber() {
         idNumber++;
-        modify = true;
     }
 
     public ArrayList<Book> getBooksForLoan() {
@@ -331,9 +332,5 @@ public class Initialize {
 
     public static int getIsbnLength() {
         return isbnLength;
-    }
-
-    public boolean isModify() {
-        return modify;
     }
 }

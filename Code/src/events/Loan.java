@@ -61,8 +61,8 @@ public class Loan {
         JSONObject obj = new JSONObject();
 
         obj.put("isbn", isbn);
-        obj.put("loanDate", loanDate);
-        obj.put("expirationDate", expirationDate);
+        obj.put("loanDate", loanDate.toString());
+        obj.put("expirationDate", expirationDate.toString());
 
         return obj;
     }

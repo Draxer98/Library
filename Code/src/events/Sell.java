@@ -58,7 +58,7 @@ public class Sell {
 
         obj.put("isbnSoldBook", isbnSoldBook);
         obj.put("price", price);
-        obj.put("sellDate", sellDate);
+        obj.put("sellDate", sellDate.toString());
 
         return obj;
     }

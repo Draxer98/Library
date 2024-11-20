@@ -6,10 +6,7 @@ import handler.*;
 import libraryMembers.Admin;
 import libraryMembers.LibraryMember;
 import libraryMembers.User;
-import util.Initialize;
-import util.Library;
-import util.LoginManager;
-import util.Util;
+import util.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,6 +15,12 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
+        String userPath = "src/data/files/Users.json";
+        String adminPath = "src/data/files/Admin.json";
+        String bookForLoanPath = "src/data/files/BooksForLoan.json";
+        String bookForSellPath = "src/data/files/BooksForSell.json";
+        String generalData = "src/data/files/GeneralData.json";
 
         Initialize initialize = new Initialize(
                 "src/data/files/Users.json",
@@ -147,6 +150,10 @@ public class Main {
 
                         // Delete the sell book
                         library.getBooksForSell(false).remove(chosenBook);
+
+                        library.getBooksForLoan().forEach(book -> {
+                            book.getIsbnCopyBook().removeIf(isbn -> isbn.equals(chosenBook.getIsbn()));
+                        });
                     }
                     /* Prendere in prestito un libro */
                     case 2 -> {
@@ -178,7 +185,11 @@ public class Main {
 
                         user.addLoan(newLoan);
 
-                        library.getBooksForLoan().remove(chosenBook);
+                        for (Book book : library.getBooksForLoan()) {
+                            if (book.getIsbn().equals(chosenBook.getIsbn())) {
+                                book.setAvaiable(false);
+                            }
+                        }
                     }
                     /* Visualizza prestiti correnti */
                     case 3 -> {
@@ -364,5 +375,7 @@ public class Main {
                 }
             }
         }
+
+        new Close(initialize, library, userPath, adminPath, bookForLoanPath, bookForSellPath, generalData);
     }
 }

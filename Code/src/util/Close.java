@@ -6,6 +6,7 @@ import data.JsonWriter;
 import libraryMembers.Admin;
 import libraryMembers.User;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 public class Close {
     private Initialize initialize;
@@ -22,10 +23,6 @@ public class Close {
     }
 
     private void saveBookForSell(String sellPath) {
-        if (!library.isModify()) {
-            return;
-        }
-
         JSONArray jsonSellFile = new JSONArray();
 
         for (BookCopy bookCopy : library.getBooksForSell(false)) {
@@ -36,10 +33,6 @@ public class Close {
     }
 
     private void saveAdmin(String adminPath) {
-        if (!initialize.isModify()) {
-            return;
-        }
-
         JSONArray jsonAdminFile = new JSONArray();
 
         for (Admin admin : initialize.getAdmins()) {
@@ -50,10 +43,6 @@ public class Close {
     }
 
     private void saveUser(String userPath) {
-        if (!initialize.isModify()) {
-            return;
-        }
-
         JSONArray jsonUserFile = new JSONArray();
 
         for (User user : initialize.getUsers()) {
@@ -64,10 +53,6 @@ public class Close {
     }
 
     private void saveBookForLoan(String loanPath) {
-        if (!library.isModify()) {
-            return;
-        }
-
         JSONArray jsonLoanFile = new JSONArray();
 
         for (Book book : library.getBooksForLoan()) {
@@ -75,5 +60,14 @@ public class Close {
         }
 
         JsonWriter.writeList(jsonLoanFile, loanPath);
+    }
+
+    private void saveGeneralData(String generalDataPath) {
+        JSONObject jsonGeneralDataFile = new JSONObject();
+
+        jsonGeneralDataFile.put("idNumber", initialize.getIdNumber());
+        jsonGeneralDataFile.put("isbnLength", Initialize.getIsbnLength());
+
+        JsonWriter.writeObj(jsonGeneralDataFile, generalDataPath);
     }
 }
