@@ -1,5 +1,7 @@
 package util;
 
+import books.Book;
+import data.JsonWriter;
 import org.json.simple.JSONArray;
 
 public class Close {
@@ -33,7 +35,13 @@ public class Close {
             return;
         }
 
-        JSONArray jsonUserFile = new JSONArray();
+        JSONArray jsonLoanFile = new JSONArray();
+
+        for (Book book : library.getBooksForLoan()) {
+            jsonLoanFile.add(book.toJson());
+        }
+
+        JsonWriter.writeList(jsonLoanFile, loanPath);
     }
 
 

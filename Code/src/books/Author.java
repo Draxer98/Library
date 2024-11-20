@@ -1,5 +1,7 @@
 package books;
 
+import org.json.simple.JSONObject;
+
 /**
  * The author class represents an author of books.
  * An author has an identifier, first name and last name.
@@ -35,5 +37,14 @@ public class Author {
                 "nome = '" + name + "'" +
                 ", cognome = '" + surname + "'" +
                 '}';
+    }
+
+    public JSONObject toJson() {
+        JSONObject obj = new JSONObject();
+
+        obj.put("name", name);
+        obj.put("surname", surname);
+
+        return obj;
     }
 }

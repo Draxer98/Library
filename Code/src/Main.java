@@ -332,7 +332,6 @@ public class Main {
                         } else {
                             System.out.println("Libro non trovato.");
                         }
-                        ;
                     }
                     /* Esistenza libro */
                     case 10 -> {

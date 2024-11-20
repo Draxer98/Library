@@ -1,6 +1,8 @@
 package books;
 
 import category.Category;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 
@@ -110,5 +112,33 @@ public class Book {
                 ", Prezzo = '" + price + "'" +
                 ", Categoria = '" + category + "'" +
                 '}';
+    }
+
+    public JSONObject toJson() {
+        JSONObject obj = new JSONObject();
+
+        obj.put("isbn", isbn);
+        obj.put("title", title);
+
+        JSONArray authorsArray = new JSONArray();
+
+        for (Author author : authors) {
+            authorsArray.add(author.toJson());
+        }
+
+        obj.put("authors", authorsArray);
+        obj.put("price", price);
+        obj.put("category", category.name());
+
+        JSONArray isbnCopyBookJson = new JSONArray();
+
+        for (String isbn : isbnCopyBook) {
+            isbnCopyBookJson.add(isbn);
+        }
+
+        obj.put("isbnCopyBook", isbnCopyBookJson);
+        obj.put("isAvailable", isAvaiable);
+
+        return obj;
     }
 }
