@@ -2,10 +2,7 @@ import books.Book;
 import books.BookCopy;
 import events.Loan;
 import events.Sell;
-import handler.DeleteBookHandler;
-import handler.InsertNewBookHandler;
-import handler.InsertNewCopyBookHandler;
-import handler.RegistrationHandler;
+import handler.*;
 import libraryMembers.Admin;
 import libraryMembers.LibraryMember;
 import libraryMembers.User;
@@ -31,9 +28,10 @@ public class Main {
         LoginManager loginManager = new LoginManager(initialize.getUsers(), initialize.getAdmins());
         Library library = new Library(initialize.getBooksForLoan(), initialize.getBooksForSell());
         RegistrationHandler registrationHandler = new RegistrationHandler(initialize.getUsers(), initialize.getAdmins());
-        InsertNewBookHandler insertNewBookHandler = new InsertNewBookHandler(library.getBooksForLoan());
-        InsertNewCopyBookHandler insertNewCopyBookHandler = new InsertNewCopyBookHandler(library.getBooksForLoan());
-        DeleteBookHandler deleteBookHandler = new DeleteBookHandler(library.getBooksForLoan());
+        InsertNewBookHandler insertNewBookHandler;
+        InsertNewCopyBookHandler insertNewCopyBookHandler;
+        DeleteBookHandler deleteBookHandler;
+        ExistBookHandler existBookHandler = new ExistBookHandler(library.getBooksForLoan(), library.getBooksForSell(false));
 
         String[] loginMenu = {
                 "BENVENUTO",
@@ -153,7 +151,7 @@ public class Main {
                     /* Prendere in prestito un libro */
                     case 2 -> {
                         if (library.getBooksForLoan().isEmpty()) {
-                            System.out.println("Non ci sono libri disponibili per il perstito");
+                            System.out.println("Non ci sono libri. Disponibili per il perstito");
                             break;
                         }
 
@@ -163,7 +161,7 @@ public class Main {
                         // it means that there is only the title
                         // so there aren't books
                         if (bookString.size() == 1) {
-                            System.out.println("Non ci sono libri. Disponibili per il perstito");
+                            System.out.println("Non ci sono libri disponibili per il perstito");
                             break;
                         }
 
@@ -333,7 +331,28 @@ public class Main {
                     }
                     /* Esistenza libro */
                     case 10 -> {
+                        existBookHandler = new ExistBookHandler(library.getBooksForLoan(), library.getBooksForSell(false));
 
+                        // take the isbn to check the exists
+                        String isbn = existBookHandler.selectBookToVerify(scanner);
+
+                        for (Book book : library.getBooksForLoan()) {
+                            if (book.getIsbn().equals(isbn)) {
+                                System.out.println("Libro trovato. Eccolo: ");
+                                System.out.println(book.toString());
+                                break;
+                            }
+                        }
+
+                        for (BookCopy book : library.getBooksForSell(false)) {
+                            if (book.getIsbn().equals(isbn)) {
+                                System.out.println("Libro trovato. Eccolo: ");
+                                System.out.println(book.toString(library.getBooksForLoan()));
+                                break;
+                            }
+                        }
+
+                        System.out.println("Libro non trovato");
                     }
                     default -> {
                         exit = false;
