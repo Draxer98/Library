@@ -3,6 +3,8 @@ package util;
 import books.Book;
 import books.BookCopy;
 import data.JsonWriter;
+import libraryMembers.Admin;
+import libraryMembers.User;
 import org.json.simple.JSONArray;
 
 public class Close {
@@ -34,11 +36,31 @@ public class Close {
     }
 
     private void saveAdmin(String adminPath) {
+        if (!initialize.isModify()) {
+            return;
+        }
 
+        JSONArray jsonAdminFile = new JSONArray();
+
+        for (Admin admin : initialize.getAdmins()) {
+            jsonAdminFile.add(admin.toJson());
+        }
+
+        JsonWriter.writeList(jsonAdminFile, adminPath);
     }
 
     private void saveUser(String userPath) {
+        if (!initialize.isModify()) {
+            return;
+        }
 
+        JSONArray jsonUserFile = new JSONArray();
+
+        for (User user : initialize.getUsers()) {
+            jsonUserFile.add(user.toJson());
+        }
+
+        JsonWriter.writeList(jsonUserFile, userPath);
     }
 
     private void saveBookForLoan(String loanPath) {
@@ -54,6 +76,4 @@ public class Close {
 
         JsonWriter.writeList(jsonLoanFile, loanPath);
     }
-
-
 }

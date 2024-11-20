@@ -1,5 +1,7 @@
 package events;
 
+import org.json.simple.JSONObject;
+
 import java.time.LocalDate;
 
 /**
@@ -49,5 +51,15 @@ public class Sell {
                 ", Prezzo = '" + price + "'" +
                 ", Data di acquisto = '" + sellDate.toString() + "'" +
                 "}";
+    }
+
+    public JSONObject toJson() {
+        JSONObject obj = new JSONObject();
+
+        obj.put("isbnSoldBook", isbnSoldBook);
+        obj.put("price", price);
+        obj.put("sellDate", sellDate);
+
+        return obj;
     }
 }

@@ -1,5 +1,7 @@
 package events;
 
+import org.json.simple.JSONObject;
+
 import java.time.LocalDate;
 
 /**
@@ -53,5 +55,15 @@ public class Loan {
                 ", Data di prestito = '" + loanDate.toString() + "'" +
                 ", Data di consegna = '" + expirationDate.toString() + "'" +
                 "}";
+    }
+
+    public JSONObject toJson() {
+        JSONObject obj = new JSONObject();
+
+        obj.put("isbn", isbn);
+        obj.put("loanDate", loanDate);
+        obj.put("expirationDate", expirationDate);
+
+        return obj;
     }
 }

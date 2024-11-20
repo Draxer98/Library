@@ -2,6 +2,7 @@ package libraryMembers;
 
 import events.Loan;
 import events.Sell;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
@@ -92,6 +93,30 @@ public class User extends LibraryMember {
     }
 
     public JSONObject toJson() {
-        return new JSONObject();
+        JSONObject obj = new JSONObject();
+
+        obj.put("id", id);
+        obj.put("password", password);
+        obj.put("name", name);
+        obj.put("surname", surname);
+        obj.put("phoneNumber", phoneNumber);
+
+        JSONArray loansJson = new JSONArray();
+
+        for (Loan loan : loans) {
+            loansJson.add(loan.toJson());
+        }
+
+        obj.put("", loansJson);
+
+        JSONArray sellsJson = new JSONArray();
+
+        for (Sell sell : sells) {
+            sellsJson.add(sell.toJson());
+        }
+
+        obj.put("sells", sellsJson);
+
+        return obj;
     }
 }

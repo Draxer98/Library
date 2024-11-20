@@ -1,5 +1,7 @@
 package libraryMembers;
 
+import org.json.simple.JSONObject;
+
 /**
  * Represents the admin account in the library.
  * Is the child class of {@link LibraryMember}.
@@ -18,5 +20,17 @@ public class Admin extends LibraryMember {
                 "\tCognome = '" + surname + "'\n" +
                 "\tNumero di telefono = '" + phoneNumber + "'\n" +
                 "}";
+    }
+
+    public JSONObject toJson() {
+        JSONObject obj = new JSONObject();
+
+        obj.put("id", id);
+        obj.put("password", password);
+        obj.put("name", name);
+        obj.put("surname", surname);
+        obj.put("phoneNumber", phoneNumber);
+
+        return obj;
     }
 }

@@ -332,4 +332,8 @@ public class Initialize {
     public static int getIsbnLength() {
         return isbnLength;
     }
+
+    public boolean isModify() {
+        return modify;
+    }
 }
