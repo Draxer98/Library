@@ -33,10 +33,10 @@ public class BookCopy {
         this.parentIsbn = parentIsbn;
     }
 
-
+    @Override
     public boolean equals(Object obj) {
         if (obj instanceof BookCopy book) {
-            return parentIsbn.equals(book.getParentIsbn());
+            return this.isbn.equals(book.getIsbn());
         }
 
         return false;

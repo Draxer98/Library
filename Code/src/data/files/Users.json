@@ -6,28 +6,8 @@
     "surname": "Doe",
     "phoneNumber": 1234567890,
     "loans": [
-      {
-        "isbn": "9783161484100",
-        "loanDate": "01-01-2023",
-        "expirationDate": "01-02-2023"
-      },
-      {
-        "isbn": "9781234567897",
-        "loanDate": "15-02-2023",
-        "expirationDate": "15-03-2023"
-      }
     ],
     "sells": [
-      {
-        "isbnSoldBook": "9780123456789",
-        "price": 25,
-        "sellDate": "10-03-2023"
-      },
-      {
-        "isbnSoldBook": "9789876543210",
-        "price": 30,
-        "sellDate": "20-03-2023"
-      }
     ]
   }
 ]

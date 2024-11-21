@@ -372,4 +372,8 @@ public class Initialize {
     public static int getIsbnLength() {
         return isbnLength;
     }
+
+    public ArrayList<Shelf> getShelves() {
+        return shelves;
+    }
 }

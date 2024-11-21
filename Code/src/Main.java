@@ -24,8 +24,9 @@ public class Main {
 
         Initialize initialize = new Initialize(userPath, adminPath, bookForLoanPath, generalData);
         LoginManager loginManager = new LoginManager(initialize.getUsers(), initialize.getAdmins());
-        Library library = new Library(initialize.getBooksForLoan(), initialize.getBooksForSell());
-        RegistrationHandler registrationHandler = new RegistrationHandler(initialize.getUsers(), initialize.getAdmins());
+        Library library = new Library(initialize.getBooksForLoan(), initialize.getBooksForSell(), initialize.getShelves());
+
+        RegistrationHandler registrationHandler;
         InsertNewBookHandler insertNewBookHandler;
         InsertNewCopyBookHandler insertNewCopyBookHandler;
         DeleteBookHandler deleteBookHandler;
@@ -41,6 +42,7 @@ public class Main {
                 "LIBRERIA",
                 "Comprare un libro",
                 "Prendere in prestito un libro",
+                "Visualizza tutti i libri",
                 "Visualizza prestiti correnti",
                 "Visualizza storico vendite",
                 "Info account",
@@ -186,12 +188,22 @@ public class Main {
                             }
                         }
                     }
-                    /* Visualizza prestiti correnti */
+                    /* Restituici prestito */
                     case 3 -> {
+                        //
+                    }
+                    /* Visualizza tutti i libri */
+                    case 4 -> {
+                        library.getShelves().forEach(shelf -> {
+                            System.out.println(shelf.toString(library.getBooksForLoan()));
+                        });
+                    }
+                    /* Visualizza prestiti correnti */
+                    case 5 -> {
                         user.getLoans().forEach(System.out::println);
                     }
                     /* Visualizza storico vendite */
-                    case 4 -> {
+                    case 6 -> {
                         System.out.println("===============");
                         System.out.println("STORICO VENDITE");
                         System.out.println("===============");
@@ -199,7 +211,7 @@ public class Main {
                         user.getSells().forEach(System.out::println);
                     }
                     /* Info account */
-                    case 5 -> {
+                    case 7 -> {
                         System.out.println("============");
                         System.out.println("INFO ACCOUNT");
                         System.out.println("============");
@@ -217,6 +229,8 @@ public class Main {
 
                     /* Registrazione utenti */
                     case 1 -> {
+                        registrationHandler = new RegistrationHandler(initialize.getUsers(), initialize.getAdmins());
+
                         // Get the name, surname and phone number
                         LibraryMember libraryMember = registrationHandler.takeBaseInfoOfUser(scanner);
 
@@ -231,6 +245,8 @@ public class Main {
                     }
                     /* Registrazione admin */
                     case 2 -> {
+                        registrationHandler = new RegistrationHandler(initialize.getUsers(), initialize.getAdmins());
+
                         // Get the name, surname and phone number
                         LibraryMember libraryMember = registrationHandler.takeBaseInfoOfUser(scanner);
 

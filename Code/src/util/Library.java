@@ -2,6 +2,7 @@ package util;
 
 import books.Book;
 import books.BookCopy;
+import books.Shelf;
 import events.Loan;
 import events.Sell;
 
@@ -18,11 +19,12 @@ public class Library {
     private ArrayList<Loan> loans;
     private ArrayList<Book> booksForLoan;
     private ArrayList<BookCopy> booksForSell;
-    private
+    private ArrayList<Shelf> shelves;
 
-    public Library(ArrayList<Book> booksForLoan, ArrayList<BookCopy> booksForSell) {
+    public Library(ArrayList<Book> booksForLoan, ArrayList<BookCopy> booksForSell, ArrayList<Shelf> shelves) {
         this.booksForLoan = booksForLoan;
         this.booksForSell = booksForSell;
+        this.shelves = shelves;
     }
 
     /**
@@ -181,5 +183,9 @@ public class Library {
         booksForSell.removeIf(bookCopy -> bookCopy.getParentIsbn().equals(book.getIsbn()));
 
         return booksForLoan.remove(book);
+    }
+
+    public ArrayList<Shelf> getShelves() {
+        return shelves;
     }
 }
