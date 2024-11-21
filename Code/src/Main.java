@@ -22,19 +22,14 @@ public class Main {
         String bookForSellPath = "src/data/files/BooksForSell.json";
         String generalData = "src/data/files/GeneralData.json";
 
-        Initialize initialize = new Initialize(
-                "src/data/files/Users.json",
-                "src/data/files/Admin.json",
-                "src/data/files/BooksForLoan.json",
-                "src/data/files/GeneralData.json"
-        );
+        Initialize initialize = new Initialize(userPath, adminPath, bookForLoanPath, generalData);
         LoginManager loginManager = new LoginManager(initialize.getUsers(), initialize.getAdmins());
         Library library = new Library(initialize.getBooksForLoan(), initialize.getBooksForSell());
         RegistrationHandler registrationHandler = new RegistrationHandler(initialize.getUsers(), initialize.getAdmins());
         InsertNewBookHandler insertNewBookHandler;
         InsertNewCopyBookHandler insertNewCopyBookHandler;
         DeleteBookHandler deleteBookHandler;
-        ExistBookHandler existBookHandler = new ExistBookHandler(library.getBooksForLoan(), library.getBooksForSell(false));
+        ExistBookHandler existBookHandler;
 
         String[] loginMenu = {
                 "BENVENUTO",
@@ -376,6 +371,7 @@ public class Main {
             }
         }
 
+        // Save all changes
         new Close(initialize, library, userPath, adminPath, bookForLoanPath, bookForSellPath, generalData);
     }
 }

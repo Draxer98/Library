@@ -3,16 +3,17 @@ package util;
 import books.Author;
 import books.Book;
 import books.BookCopy;
+import books.Shelf;
 import category.Category;
 import data.JsonReader;
 import events.Loan;
 import events.Sell;
+import libraryMembers.Admin;
 import libraryMembers.LibraryMember;
+import libraryMembers.User;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
-import libraryMembers.Admin;
-import libraryMembers.User;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -29,6 +30,7 @@ public class Initialize {
     private ArrayList<Admin> admins;
     private ArrayList<Book> booksForLoan;
     private ArrayList<BookCopy> booksForSell;
+    private ArrayList<Shelf> shelves;
     private int idNumber;
     private static int isbnLength;
 
@@ -44,7 +46,44 @@ public class Initialize {
 
         booksForSell = booksForLoan != null ? loadBooksForSell(booksForLoan) : new ArrayList<>();
 
+        shelves = loadShelves();
+
         loadGeneralData(generalDataPath);
+    }
+
+    private ArrayList<Shelf> loadShelves() {
+        ArrayList<Shelf> shelves = new ArrayList<>();
+
+        booksForSell.forEach(book -> {
+            Book parentBook = searchByIsbn(book.getParentIsbn());
+
+            if (shelves.contains(new Shelf(parentBook.getCategory()))) {
+                shelves.get(shelves.indexOf(new Shelf(parentBook.getCategory()))).addBook(book);
+            } else {
+                Shelf newShelf = new Shelf(parentBook.getCategory());
+                newShelf.addBook(book);
+
+                shelves.add(newShelf);
+            }
+        });
+
+        return shelves;
+    }
+
+    /**
+     * This method research the parent isbn in the list of the books for loans.
+     *
+     * @param isbn the isbn to research.
+     * @return the book if it finds the parentBook else return null
+     */
+    public Book searchByIsbn(String isbn) {
+        for (Book book : booksForLoan) {
+            if (book.getIsbn().equals(isbn)) {
+                return book;
+            }
+        }
+
+        return null;
     }
 
     /**

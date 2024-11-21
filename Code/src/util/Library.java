@@ -18,6 +18,7 @@ public class Library {
     private ArrayList<Loan> loans;
     private ArrayList<Book> booksForLoan;
     private ArrayList<BookCopy> booksForSell;
+    private
 
     public Library(ArrayList<Book> booksForLoan, ArrayList<BookCopy> booksForSell) {
         this.booksForLoan = booksForLoan;
