@@ -199,6 +199,13 @@ public class Main {
 
                         // remove loan from the list
                         if (user.removeLoan(loan)) {
+                            for (Book book : library.getBooksForLoan()) {
+                                if (book.getIsbn().equals(loan.getIsbn())) {
+                                    book.setAvaiable(true);
+                                    break;
+                                }
+                            }
+
                             System.out.println("Prestito eliminato con successo.");
                         } else {
                             System.out.println("Errore nell'eliminazione del prestito.");
