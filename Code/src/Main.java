@@ -160,7 +160,7 @@ public class Main {
                             break;
                         }
 
-                        ArrayList<String> bookString = library.bookForLoanToMenu();
+                        ArrayList<String> bookString = library.getBooksForLoanAvaiableToMenu();
 
                         // if the size of the final array is
                         // it means that there is only the title
@@ -171,7 +171,7 @@ public class Main {
                         }
 
                         int index = Util.menu(bookString, scanner) - 1;
-                        Book chosenBook = library.getBooksForLoan().get(index);
+                        Book chosenBook = library.getBooksForLoanAvaiable().get(index);
 
                         Loan newLoan = new Loan(
                                 chosenBook.getIsbn(),
@@ -183,7 +183,7 @@ public class Main {
 
                         user.addLoan(newLoan);
 
-                        for (Book book : library.getBooksForLoan()) {
+                        for (Book book : library.getBooksForLoanAvaiable()) {
                             if (book.getIsbn().equals(chosenBook.getIsbn())) {
                                 book.setAvaiable(false);
                             }
@@ -191,6 +191,10 @@ public class Main {
                     }
                     /* Restituici prestito */
                     case 3 -> {
+                        if (user.getLoans().isEmpty()) {
+                            System.out.println("Non hai prestiti.");
+                        }
+
                         // refresh the loan of the user
                         repayLoanHandler = new RepayLoanHandler(user.getLoans());
 

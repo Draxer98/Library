@@ -67,10 +67,10 @@ public class Library {
      * Synchronizes the `booksForSell` list with the ISBNs in the `isbnCopyBook` attribute of each book in `booksForLoan`.<br>
      * For each book in `booksForLoan`, this method checks if all ISBNs listed in its `isbnCopyBook` attribute have a <br>
      * corresponding `BookCopy` object in `booksForSell`. If a `BookCopy` for an ISBN is missing, it creates and adds one.<br>
-     *<br>
+     * <br>
      * This method ensures consistency between the books available for loans and those available for sale.<br>
      * If any modifications are made to the `booksForSell` list, the `modify` flag is set to true.<br>
-     *<br>
+     * <br>
      * <pre>
      * Example:
      * If a book in `booksForLoan` has an ISBN in its `isbnCopyBook` list, but no `BookCopy` object exists for it in
@@ -187,5 +187,22 @@ public class Library {
 
     public ArrayList<Shelf> getShelves() {
         return shelves;
+    }
+
+    public ArrayList<Book> getBooksForLoanAvaiable() {
+        // Get any book avaiable
+        return new ArrayList<>(booksForLoan.stream().filter(Book::isAvaiable).toList());
+    }
+
+    public ArrayList<String> getBooksForLoanAvaiableToMenu() {
+        ArrayList<String> bookString = new ArrayList<>();
+        bookString.add("SCEGLI IL TUO LIBRO");
+
+        // Transform only the available books into a string
+        getBooksForLoanAvaiable().forEach(book -> {
+            bookString.add(book.toString());
+        });
+
+        return bookString;
     }
 }
