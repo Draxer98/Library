@@ -43,6 +43,7 @@ public class Main {
                 "LIBRERIA",
                 "Comprare un libro",
                 "Prendere in prestito un libro",
+                "Restituici prestito",
                 "Visualizza tutti i libri",
                 "Visualizza prestiti correnti",
                 "Visualizza storico vendite",
