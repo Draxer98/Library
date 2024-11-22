@@ -31,6 +31,10 @@ public class User extends LibraryMember {
         this.loans.add(loan);
     }
 
+    public boolean removeLoan(Loan loan) {
+        return this.loans.remove(loan);
+    }
+
     public void addSell(Sell sell) {
         this.sells.add(sell);
     }

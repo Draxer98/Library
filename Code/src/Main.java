@@ -31,6 +31,7 @@ public class Main {
         InsertNewCopyBookHandler insertNewCopyBookHandler;
         DeleteBookHandler deleteBookHandler;
         ExistBookHandler existBookHandler;
+        RepayLoanHandler repayLoanHandler;
 
         String[] loginMenu = {
                 "BENVENUTO",
@@ -190,7 +191,18 @@ public class Main {
                     }
                     /* Restituici prestito */
                     case 3 -> {
-                        //
+                        // refresh the loan of the user
+                        repayLoanHandler = new RepayLoanHandler(user.getLoans());
+
+                        // select loan
+                        Loan loan = repayLoanHandler.selectLoan(scanner);
+
+                        // remove loan from the list
+                        if (user.removeLoan(loan)) {
+                            System.out.println("Prestito eliminato con successo.");
+                        } else {
+                            System.out.println("Errore nell'eliminazione del prestito.");
+                        }
                     }
                     /* Visualizza tutti i libri */
                     case 4 -> {
