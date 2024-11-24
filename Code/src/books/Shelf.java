@@ -3,7 +3,16 @@ package books;
 import category.Category;
 
 import java.util.ArrayList;
-
+/**
+ * Represents a bookshelf in a library, containing copies of books belonging to a specific category.
+ * The shelf can hold multiple copies of the same book, but does not allow duplicates.
+ * 
+ * The class provides methods to add new books to the shelf, retrieve and modify the list of books,
+ * and get information about the shelf's category.
+ * 
+ * The class also implements a method to represent the structure of the shelf as a string, 
+ * displaying the category and the books present.
+ */
 public class Shelf {
     private ArrayList<BookCopy> books;
     private Category category;

@@ -11,7 +11,16 @@ import util.Util;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
+/**
+ * Handler class responsible for inserting a new book into the system.
+ * It handles the process of taking user input for adding a new book to the 
+ * library, including book details such as ISBN, title, authors, price, 
+ * category, and number of copies. It also performs validations on ISBN uniqueness
+ * and length before proceeding with the insertion. This class provides methods
+ * to take various pieces of information related to a book, including creating
+ * a new {@link Book} and its associated copies, while ensuring proper error handling
+ * for invalid inputs.
+ */
 public class InsertNewBookHandler {
     private ArrayList<Book> booksForLoan;
 
